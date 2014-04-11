@@ -5,7 +5,7 @@ Note: this repository is 100% empty right now, I'm not sure why I wrote anything
 
 This is an in-the-browser implementation of "ASCII birds", a simplified, turn-based flappy birds clone. It is implemented in JavaScript.
 
-For my own convenience, I have included thin. 
+For my own convenience, I have included a shell script (`launch-ascii-birds.sh`)that launches Ruby/WEBrick and a browser to open the page.
 
 Full details of the problem (and similar solutions) can be found at http://www.reddit.com/r/dailyprogrammer/comments/22slvn/4112014_challenge_157_hard_ascii_bird/
 
