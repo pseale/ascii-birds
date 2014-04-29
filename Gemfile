@@ -9,3 +9,6 @@ gem 'capybara-jasmine'
 gem 'capybara-webkit'
 gem 'rspec'
 gem 'pry'
+
+gem 'jasmine'
+gem 'jasmine-headless-webkit'
