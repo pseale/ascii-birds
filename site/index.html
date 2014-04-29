@@ -7,13 +7,22 @@
     .button {
       clear: left
     }
-    pre.title {
-       margin:15px;
-     }
+
+    body {
+      margin: 15px;
+    }
+
+    pre#screen {
+      display: none;
+    }
+
+    div#quit-button {
+      display: none;
+    }
   </style>
 </head>
 <body>
-<pre class="title">                                                                                                                                                                                          
+<pre id="title">                                                                                                                                                                                          
                                                                                                                                                                                           
                AAA                 SSSSSSSSSSSSSSS         CCCCCCCCCCCCCIIIIIIIIIIIIIIIIIII     BBBBBBBBBBBBBBBBB   IIIIIIIIIIRRRRRRRRRRRRRRRRR   DDDDDDDDDDDDD           SSSSSSSSSSSSSSS 
               A:::A              SS:::::::::::::::S     CCC::::::::::::CI::::::::I::::::::I     B::::::::::::::::B  I::::::::IR::::::::::::::::R  D::::::::::::DDD      SS:::::::::::::::S
@@ -39,15 +48,30 @@ AAAAAAA                   AAAAAAASSSSSSSSSSSSSSS           CCCCCCCCCCCCCIIIIIIII
                                                                                                                                                                                           
                                                                                                                                                                                           
 </pre>
-<div class="button">
+<pre id="screen">
+~~~~~~~~~~~~~~~~~~~~~~
+~....................~
+~....................~
+~....................~
+~....................~
+~....................~
+~....................~
+~....................~
+~....................~
+~....................~
+~....................~
+~~~~~~~~~~~~~~~~~~~~~~
+
+</pre>
+<div id="start-button" class="button">
   <pre>xxxxxxxxxxx
 x  <a id="start-button" href="#start">START</a>  x
 xxxxxxxxxxx</pre>
 </div>
 <br />
-<div class="button">
-  <pre id="quit-button">xxxxxxxxxxx
-x  <a id="start-button" href="#quit">QUIT</a>   x
+<div id="quit-button" class="button">
+  <pre>xxxxxxxxxxx
+x  <a id="quit-button" href="#quit">QUIT</a>   x
 xxxxxxxxxxx</pre>
 </div>
 
