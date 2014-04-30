@@ -14,12 +14,12 @@ function quitGame() {
 
 //jQuery page bindings
 $(document).ready(function() {
-  $('#start-button').click(function() {
+  $('a#start-button').click(function() {
     startGame();
     return false;
   });  
 
-  $('#quit-button').click(function() {
+  $('a#quit-button').click(function() {
     quitGame();
     return false;
   });  
