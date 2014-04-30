@@ -11,6 +11,6 @@ describe 'Visiting the site fresh' do
     visit '/'
     #binding.pry
 
-    #expect(page).to_not have_selector('div#quit-button', :visible=>true)
+    expect(page).to_not have_selector('div#quit-button', :visible=>true)
   end
 end
