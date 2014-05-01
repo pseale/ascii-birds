@@ -8,6 +8,7 @@ gem 'capybara'
 gem 'capybara-jasmine'
 gem 'capybara-webkit'
 gem 'rspec'
+gem 'fuubar'
 gem 'pry'
 
 gem 'jasmine'
