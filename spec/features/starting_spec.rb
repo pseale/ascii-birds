@@ -5,16 +5,16 @@ describe 'Visiting the site fresh' do
     visit '/'
   end
 
-  it 'should have a START button' do
-    expect(page.has_link? "START").to be_true
-  end
-
   it 'should have a title screen' do
     expect(find('#title').visible?).to be_true
   end
 
   it 'should not show the game screen' do
     expect(find('#screen', :visible=>false).visible?).to be_false
+  end
+
+  it 'should have a START button' do
+    expect(page.has_link? "START").to be_true
   end
 
   it 'should NOT have a QUIT button' do

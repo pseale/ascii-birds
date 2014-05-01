@@ -1,9 +1,15 @@
 
+Playing the game
+  should not show the title screen
+  should show the screen
+  should NOT have a START button
+  should have a QUIT button
+
 Visiting the site fresh
-  should have a START button
   should have a title screen
   should not show the game screen
+  should have a START button
   should NOT have a QUIT button
 
-Finished in 5.87 seconds
-4 examples, 0 failures
+Finished in 8.19 seconds
+8 examples, 0 failures
