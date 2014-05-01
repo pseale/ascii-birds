@@ -5,5 +5,5 @@ Visiting the site fresh
   should not show the game screen
   should NOT have a QUIT button
 
-Finished in 4.9 seconds
+Finished in 5.87 seconds
 4 examples, 0 failures
