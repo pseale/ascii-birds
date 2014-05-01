@@ -1,4 +1,4 @@
-function () {
+(function () {
 
 function startGame() {
   $('#title').hide();
@@ -29,4 +29,4 @@ $(document).ready(function() {
 
 
 
-}();
+})();
