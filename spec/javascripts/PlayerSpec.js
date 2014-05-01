@@ -1,5 +1,5 @@
-describe("test", function() {
-  it("should be able to run a function from my script", function() {
-    expect(test()).toEqual(5);
+describe("this is a test", function() {
+  it("works hopefully", function() {
+    expect(5).toEqual(5);
   });
 });
