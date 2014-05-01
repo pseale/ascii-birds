@@ -20,4 +20,8 @@ describe 'Visiting the site fresh' do
   it 'should NOT have a QUIT button' do
     expect(page).to_not have_selector('div#quit-button', :visible=>true)
   end
+
+  it 'should NOT have a command bar' do
+    expect(page).to_not have_selector('div#command-bar', :visible=>true)
+  end
 end

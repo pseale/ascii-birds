@@ -1,32 +1,46 @@
 (function () {
 
-function startGame() {
-  $('#title').hide();
-  $('#start-button').hide();
-  $('#screen').show();
-  $('#quit-button').show(); 
-}
+  var game = new Game();
 
-function quitGame() {
-  $('#title').show();
-  $('#start-button').show();
-  $('#screen').hide();
-  $('#quit-button').hide(); 
-}
+  function drawScreen(screenText) {
+    var text = "~~~~~~~~~~~~~~~~~~~~~~\n";
 
-//jQuery page bindings
-$(document).ready(function() {
-  $('a#start-button').click(function() {
-    startGame();
-    return false;
-  });  
+    _.each(screenText, function(line) {
+      text += "~" + line + "~\n"
+    });
+     text += "~~~~~~~~~~~~~~~~~~~~~~\n";
 
-  $('a#quit-button').click(function() {
-    quitGame();
-    return false;
-  });  
-});
+     $('#screen').html(text);
+  }
 
+  function startGame() {
+    $('#title').hide();
+    $('#start-button').hide();
+    $('#quit-button').show(); 
+    $('#command-bar').show();
 
+    drawScreen(game.createScreen());
+    $('#screen').show();
+  }
 
+  function quitGame() {
+    $('#title').show();
+    $('#start-button').show();
+    $('#quit-button').hide(); 
+    $('#command-bar').hide();
+    $('#screen').hide();
+  }
+
+  //jQuery page bindings
+  $(document).ready(function() {
+    $('a#start-button').click(function() {
+      startGame();
+      return false;
+    });  
+
+    $('a#quit-button').click(function() {
+      quitGame();
+      return false;
+    });  
+  });
 })();

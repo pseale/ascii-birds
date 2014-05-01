@@ -12,11 +12,7 @@
       margin: 15px;
     }
 
-    pre#screen {
-      display: none;
-    }
-
-    div#quit-button {
+    pre#screen, div#quit-button, #command-bar {
       display: none;
     }
   </style>
@@ -61,8 +57,14 @@ AAAAAAA                   AAAAAAASSSSSSSSSSSSSSS           CCCCCCCCCCCCCIIIIIIII
 ~....................~
 ~....................~
 ~~~~~~~~~~~~~~~~~~~~~~
-
 </pre>
+<div id="command-bar">
+  <button id="0-flaps">0</button>
+  <button id="1-flap">1</button>
+  <button id="2-flap">2</button>
+  <button id="3-flap">3</button>
+  <button id="4-flap">4</button>
+</div>
 <div id="start-button" class="button">
   <pre>xxxxxxxxxxx
 x  <a id="start-button" href="#start">START</a>  x
@@ -76,7 +78,8 @@ xxxxxxxxxxx</pre>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-<script src="index.html.js"></script>
+<script src="https://cdn.jsdelivr.net/underscorejs/1.6.0/underscore-min.js"></script>
 <script src="main.js"></script>
+<script src="index.html.js"></script>
 </body>
 </html>

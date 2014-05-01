@@ -21,4 +21,8 @@ describe 'Playing the game' do
   it 'should have a QUIT button' do
     expect(page).to have_selector('div#quit-button')
   end
+
+  it 'should have a command bar' do
+    expect(page).to have_selector('div#command-bar')
+  end
 end
