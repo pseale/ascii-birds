@@ -1,0 +1,12 @@
+Jasmine2.0.0finished in 0.007s
+raise exceptions
+6 specs, 0 failures
+Starting a new game
+starts the player at height 6
+has a row of top-side columns
+has a row of bottom-side columns
+Generating columns
+generates the first column between position 7 and 10
+generates subsequent columns from 7 to 10 columns away
+Receiving a move command
+moves the player 2 columns over
