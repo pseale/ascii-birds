@@ -11,6 +11,10 @@
 #   - dist/**/*.js
 #
 src_files:
+    - https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js
+    - https://cdn.jsdelivr.net/underscorejs/1.6.0/underscore-min.js
+
+    - site/class.js
     - site/main.js
 
 # stylesheets
