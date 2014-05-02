@@ -1,18 +1,3 @@
-
-//----------------------------------------------------------------------------
-
-var ColumnGenerator = Class.extend({
-  init: function() {
-    this.offset = 0;
-  },
-
-  next: function() {
-    this.offset += _.random(7, 10);
-
-    return this.offset;
-  },
-});
-
 var Game = Class.extend({
   init: function() {
     this.topColumnGenerator = new ColumnGenerator();
