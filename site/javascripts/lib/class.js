@@ -63,19 +63,3 @@
   };
 })();
 
-
-//----------------------------------------------------------------------------
-
-
-
-var Game = Class.extend({
-  createViewPort: function() {
-    viewPort = {
-      playerHeight: 6,
-      topColumns: [2, 9, 16],
-      bottomColumns: [1, 8, 17],
-    };
-
-    return viewPort;
-  },
-});

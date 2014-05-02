@@ -27,13 +27,15 @@
 
     screen[playerRowOffset][1] = "@";
 
-    _.each(viewPort.topColumns, function (column) {
+    var topColumnsInView = _.filter(viewPort.topColumns, function(column) { return column < 20 });
+    _.each(topColumnsInView, function (column) {
       for(var row=0; row<5; row++) {
         screen[row][column] = "#";
       }
     });
 
-    _.each(viewPort.bottomColumns, function (column) {
+    var bottomColumnsInView = _.filter(viewPort.bottomColumns, function(column) { return column < 20 });
+    _.each(bottomColumnsInView, function (column) {
       for(var row=9; row>5; row--) {
         screen[row][column] = "#";
       }
@@ -57,7 +59,7 @@
     $('#start-button').hide();
     $('#quit-button').show(); 
     $('#command-bar').show();
-
+    game = new Game();
     formatScreen(drawScreen(game.createViewPort()));
     $('#screen').show();
   }

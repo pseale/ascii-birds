@@ -1,6 +1,10 @@
 describe("Starting a new game", function() {
-  var game = new Game();
-  var viewPort = game.createViewPort();
+  var viewPort = {};
+
+  beforeEach(function() {
+    var game = new Game();
+    viewPort = game.createViewPort();
+  });
 
   it("starts the player at height 6", function() {
     expect(viewPort.playerHeight).toEqual(6); //6th row, array offset 5
