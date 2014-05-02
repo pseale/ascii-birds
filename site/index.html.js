@@ -13,7 +13,8 @@
      $('#screen').html(text);
   }
 
-  function drawScreen(viewPort) {
+  function drawScreen() {
+    var viewPort = game.createViewPort();
     var screen = [];
     for (var row=0; row<10; row++) {
       var rowArray = [];
@@ -60,7 +61,7 @@
     $('#quit-button').show(); 
     $('#command-bar').show();
     game = new Game();
-    formatScreen(drawScreen(game.createViewPort()));
+    formatScreen(drawScreen());
     $('#screen').show();
   }
 
@@ -70,6 +71,11 @@
     $('#quit-button').hide(); 
     $('#command-bar').hide();
     $('#screen').hide();
+  }
+
+  function move(power) {
+    game.move(power);
+    formatScreen(drawScreen());
   }
 
   //jQuery page bindings
@@ -82,6 +88,31 @@
     $('a#quit-button').click(function() {
       quitGame();
       return false;
-    });  
+    });
+
+    $('a#power-0-flaps').click(function() {
+      move(0);
+      return false;
+    });
+
+    $('a#power-1-flap').click(function() {
+      move(1);
+      return false;
+    });
+
+    $('a#power-2-flap').click(function() {
+      move(2);
+      return false;
+    });
+
+    $('a#power-3-flap').click(function() {
+      move(3);
+      return false;
+    });
+
+    $('a#power-4-flap').click(function() {
+      move(4);
+      return false;
+    });
   });
 })();
