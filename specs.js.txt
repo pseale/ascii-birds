@@ -1,6 +1,6 @@
-Jasmine2.0.0finished in 0.007s
+Jasmine2.0.0finished in 0.005s
 raise exceptions
-6 specs, 0 failures
+11 specs, 0 failures
 Starting a new game
 starts the player at height 6
 has a row of top-side columns
@@ -10,3 +10,9 @@ generates the first column between position 7 and 10
 generates subsequent columns from 7 to 10 columns away
 Receiving a move command
 moves the player 2 columns over
+Finding columns in range
+excludes any column 2 spaces behind the player
+includes any column 1 space behind the player
+includes any column in the same space as the player
+includes any column in front of the player within range
+excludes any column in front of the player beyond visible range

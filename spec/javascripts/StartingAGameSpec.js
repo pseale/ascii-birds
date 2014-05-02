@@ -11,10 +11,10 @@ describe("Starting a new game", function() {
   });
 
   it("has a row of top-side columns", function() {
-    expect(viewPort.topColumns.length).toEqual(3); //improve once we "randomly" generate columns
+    expect(viewPort.topColumns.length > 0).toBeTruthy(); //improve once we "randomly" generate columns
   });
 
   it("has a row of bottom-side columns", function() {
-    expect(viewPort.bottomColumns.length).toEqual(3); //improve once we "randomly" generate columns
+    expect(viewPort.bottomColumns.length > 0).toBeTruthy(); //improve once we "randomly" generate columns
   });
 });

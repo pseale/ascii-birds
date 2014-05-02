@@ -1,27 +1,24 @@
 var Game = Class.extend({
   init: function() {
-    this.topColumnGenerator = new ColumnGenerator();
-    this.bottomColumnGenerator = new ColumnGenerator();
-    this.topColumns = [
-      this.topColumnGenerator.next(), 
-      this.topColumnGenerator.next(), 
-      this.topColumnGenerator.next()
-      ];
-    this.bottomColumns = [
-      this.bottomColumnGenerator.next(), 
-      this.bottomColumnGenerator.next(), 
-      this.bottomColumnGenerator.next()
-      ];
+    this.topColumn = new Column();
+    this.bottomColumn = new Column();
 
     this.location = 0;
+  },
+
+  getColumnsInRange: function(column) {
+    var loc = this.location;
+    return _.map(column.findAllNearby(this.location), function(col) { 
+      return col - loc + 1;
+    });
   },
 
   createViewPort: function() {
     var currentPlayerLocation = this.location;
     viewPort = {
       playerHeight: 6,
-      topColumns: _.map(this.topColumns, function(column) { return column - currentPlayerLocation; }),
-      bottomColumns: _.map(this.bottomColumns, function(column) { return column - currentPlayerLocation; }),
+      topColumns: this.getColumnsInRange(this.topColumn),
+      bottomColumns: this.getColumnsInRange(this.bottomColumn),
     };
 
     return viewPort;
