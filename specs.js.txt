@@ -1,6 +1,6 @@
-Jasmine2.0.0finished in 0.005s
+Jasmine2.0.0finished in 0.029s
 raise exceptions
-11 specs, 0 failures
+19 specs, 0 failures
 Starting a new game
 starts the player at height 6
 has a row of top-side columns
@@ -16,3 +16,21 @@ includes any column 1 space behind the player
 includes any column in the same space as the player
 includes any column in front of the player within range
 excludes any column in front of the player beyond visible range
+Calculating height
+When 0 power is applied
+drops 2 spaces
+When 1 power is applied
+lifts 1 space
+When 2 power is applied
+lifts 2 spaces
+When 3 power is applied
+lifts 3 spaces
+When 4 power is applied
+lifts 4 spaces
+When given bad input
+When given an invalid integer
+throws an error
+When given a non-integer
+throws an error
+When given null
+throws an error

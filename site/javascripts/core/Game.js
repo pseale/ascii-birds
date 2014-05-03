@@ -4,6 +4,7 @@ var Game = Class.extend({
     this.bottomColumn = new Column();
 
     this.location = 0;
+    this.playerHeight = 6;
   },
 
   getColumnsInRange: function(column) {
@@ -16,7 +17,7 @@ var Game = Class.extend({
   createViewPort: function() {
     var currentPlayerLocation = this.location;
     viewPort = {
-      playerHeight: 6,
+      playerHeight: this.playerHeight,
       topColumns: this.getColumnsInRange(this.topColumn),
       bottomColumns: this.getColumnsInRange(this.bottomColumn),
     };
@@ -24,7 +25,20 @@ var Game = Class.extend({
     return viewPort;
   },
 
+  lift: {
+    0: -2,
+    1: 1,
+    2: 2,
+    3: 3,
+    4: 4
+  },
+
   move: function(power) {
+    if (!(power in this.lift)) {
+      throw new Error("Invalid 'power', expected power 0-4, got: " + power);
+    }
+
     this.location += 2;
+    this.playerHeight += this.lift[power];
   },
 });
