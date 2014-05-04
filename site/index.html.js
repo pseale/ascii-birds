@@ -6,7 +6,7 @@
     var text = "~~~~~~~~~~~~~~~~~~~~~~\n";
 
     _.each(screenText, function(line) {
-      text += "~" + line + "~\n"
+      text += "~" + line + "~\n";
     });
      text += "~~~~~~~~~~~~~~~~~~~~~~\n";
 
@@ -19,7 +19,7 @@
     for (var row=0; row<10; row++) {
       var rowArray = [];
       for (var col=0; col<20; col++) {
-        rowArray.push(".");
+        rowArray.push("\u00B7"); //Unicode character is an 'Interpunct': http://en.wikipedia.org/wiki/Interpunct
       }
       screen.push(rowArray);
     }
