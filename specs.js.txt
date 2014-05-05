@@ -1,6 +1,6 @@
-Jasmine2.0.0finished in 0.029s
+Jasmine2.0.0finished in 0.034s
 raise exceptions
-19 specs, 0 failures
+24 specs, 0 failures
 Starting a new game
 starts the player at height 6
 has a row of top-side columns
@@ -34,3 +34,9 @@ When given a non-integer
 throws an error
 When given null
 throws an error
+Calculating trajectory
+creates a 0 power trajectory as a diagonal downward slope
+creates a 1 power trajectory as a gentle upward slope
+creates a 2 power trajectory as a diagonal upward slope
+creates a 3 power trajectory as a steep, upward slope
+creates a 4 power trajectory as a steep, upward slope
