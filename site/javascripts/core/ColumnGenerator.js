@@ -1,3 +1,5 @@
+"use strict";
+
 var ColumnGenerator = Class.extend({
   init: function() {
     this.offset = 0;

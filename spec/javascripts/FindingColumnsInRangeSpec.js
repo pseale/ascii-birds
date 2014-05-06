@@ -1,3 +1,5 @@
+"use strict";
+
 describe("Finding columns in range", function() {
   var column = {};
 

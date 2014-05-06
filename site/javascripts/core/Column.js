@@ -1,3 +1,5 @@
+"use strict";
+
 var Column = Class.extend({
   init: function() {
     this.columnGenerator = new ColumnGenerator();

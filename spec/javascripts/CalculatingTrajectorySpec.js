@@ -1,3 +1,5 @@
+"use strict";
+
 describe("Calculating trajectory", function() {
   var viewPort = {};
   beforeEach(function() {

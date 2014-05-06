@@ -1,3 +1,5 @@
+"use strict";
+
 describe("Generating columns", function() {
   var columnGenerator = {};
 

@@ -1,3 +1,5 @@
+"use strict";
+
 describe("Starting a new game", function() {
   var viewPort = {};
 

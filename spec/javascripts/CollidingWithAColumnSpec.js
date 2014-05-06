@@ -1,3 +1,5 @@
+"use strict";
+
 describe("Colliding with a column", function() {
   describe("Colliding with a top column", function() {
     var game = {};

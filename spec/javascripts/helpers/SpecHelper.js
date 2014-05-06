@@ -1,3 +1,5 @@
+"use strict";
+
 var HardcodedColumnGenerator = Class.extend({
   init: function(array) {
     this.array = array;

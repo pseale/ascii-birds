@@ -1,3 +1,5 @@
+"use strict";
+
 describe("Calculating height", function() {
   var game = {};
   var oldHeight = 0;

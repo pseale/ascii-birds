@@ -1,4 +1,5 @@
 (function () {
+  "use strict";
 
   var game = new Game();
 
@@ -56,10 +57,10 @@
 
     _.each(viewPort.trajectory, function(points) {
     });
-    screenText = [];
+    var screenText = [];
 
     _.each(screen, function(row) {
-      rowText = "";
+      var rowText = "";
       for (var i=0;i<row.length; i++) {
         rowText += row[i];
       }

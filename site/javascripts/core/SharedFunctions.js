@@ -1,3 +1,5 @@
+"use strict";
+
 function pointRowCol(row, col) {
   return {
     row: row,
