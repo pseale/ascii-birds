@@ -13,59 +13,24 @@ var GameController = Class.extend({
     this.scrollLocation = -1; //game starts displaying player 1 away from left side of screen
   },
 
-  getColumnsInRange: function(column) {
-    var loc = this.scrollLocation;
-    return _.map(column.findAllNearby(this.playerLocation.col), function(col) { 
-      return col - loc;
-    });
-  },
-
-  shiftTrajectoriesForViewPort: function(trajectories) {
-    var newTrajectories = [];
-    for (var i=0; i<trajectories.length; i++) {
-      newTrajectories.push(this.shiftArrayForViewPort(trajectories[i]));
-    }
-
-    return newTrajectories;
-  },
-
-  shiftArrayForViewPort: function(array) {
-    var newArray = [];
-    for (var i=0; i<array.length; i++) {
-      newArray.push(this.shiftForViewPort(array[i]));
-    }
-
-    return newArray;
-  },
-
-  shiftForViewPort: function(point) {
-    return pointRowCol(point.row, point.col - this.scrollLocation);
-  },
-
   createViewPort: function() {
-    var viewPort = {
-      playerLocation: this.shiftForViewPort(this.playerLocation),
-      trajectory: this.shiftTrajectoriesForViewPort(this.trajectoryCalculator.getTrajectories(this.playerLocation)),
-      topColumns: this.getColumnsInRange(this.topColumn),
-      bottomColumns: this.getColumnsInRange(this.bottomColumn),
-      collided: this.collided,
-      points: this.points,
-      gameOver: this.gameOver,
-    };
-
-    return viewPort;
+    return (new ViewPortCreator()).create(
+      this.scrollLocation,
+      this.playerLocation,
+      this.topColumn,
+      this.bottomColumn,
+      this.collided,
+      this.gameOver,
+      this.points
+      );
   },
 
-  lift: {
-    0: -2,
-    1: 1,
-    2: 2,
-    3: 3,
-    4: 4,
+  isValidPowerLevel: function(power) {
+    return power === 0 || power === 1 || power === 2 || power === 3 || power === 4;
   },
 
   move: function(power) {
-    if (!(power in this.lift)) {
+    if (!this.isValidPowerLevel(power)) {
       throw new Error("Invalid 'power', expected power 0-4, got: " + power);
     }
 
@@ -74,24 +39,15 @@ var GameController = Class.extend({
     }
 
     var trajectory = this.trajectoryCalculator.getTrajectory(this.playerLocation, power);
-    var topCollision = this.topColumn.findCollision(trajectory, 0, 4);
-    if (topCollision.collided) {
-      this.collided = true;
-      this.gameOver = true;
-      this.playerLocation = topCollision.point;
-      return;
-    }
+    var moveCommand = new MoveCommand();
 
-    var bottomCollision = this.bottomColumn.findCollision(trajectory, 6, 9);
-    if (bottomCollision.collided) {
-      this.collided = true;
-      this.gameOver = true;
-      this.playerLocation = bottomCollision.point;
-      return;
-    }
+    var result = moveCommand.execute(trajectory, this.topColumn, this.bottomColumn);
 
-    this.scrollLocation += 2;
-    this.playerLocation.col += 2;
-    this.playerLocation.row -= this.lift[power];
+    this.playerLocation = result.playerLocation;
+    this.collided = result.collided;
+    this.gameOver = result.gameOver;
+    if (!this.gameOver) {
+      this.scrollLocation += 2;
+    }
   },
 });
