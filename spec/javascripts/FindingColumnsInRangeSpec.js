@@ -1,13 +1,3 @@
-var HardcodedColumnGenerator = Class.extend({
-  init: function(array) {
-    this.array = array;
-  },
-
-  next: function() {
-    return this.array.shift();
-  }
-});
-
 describe("Finding columns in range", function() {
   var column = {};
 

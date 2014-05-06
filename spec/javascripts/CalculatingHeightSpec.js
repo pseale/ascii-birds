@@ -3,14 +3,14 @@ describe("Calculating height", function() {
   var oldHeight = 0;
   beforeEach(function() {
     game = new Game();
-    oldHeight = game.createViewPort().playerHeight;
+    oldHeight = game.createViewPort().playerLocation.row;
   });
 
   describe("When 0 power is applied", function() {
     it("drops 2 spaces", function() {
       game.move(0);
 
-      expect(game.createViewPort().playerHeight).toEqual(oldHeight-2);
+      expect(game.createViewPort().playerLocation.row).toEqual(oldHeight+2);
     });
   });
 
@@ -18,7 +18,7 @@ describe("Calculating height", function() {
     it("lifts 1 space", function() {
       game.move(1);
 
-      expect(game.createViewPort().playerHeight).toEqual(oldHeight+1);
+      expect(game.createViewPort().playerLocation.row).toEqual(oldHeight-1);
     });
   });
 
@@ -26,7 +26,7 @@ describe("Calculating height", function() {
     it("lifts 2 spaces", function() {
       game.move(2);
 
-      expect(game.createViewPort().playerHeight).toEqual(oldHeight+2);
+      expect(game.createViewPort().playerLocation.row).toEqual(oldHeight-2);
     });
   });
 
@@ -34,7 +34,7 @@ describe("Calculating height", function() {
     it("lifts 3 spaces", function() {
       game.move(3);
 
-      expect(game.createViewPort().playerHeight).toEqual(oldHeight+3);
+      expect(game.createViewPort().playerLocation.row).toEqual(oldHeight-3);
     });
   });
 
@@ -42,7 +42,7 @@ describe("Calculating height", function() {
     it("lifts 4 spaces", function() {
       game.move(4);
 
-      expect(game.createViewPort().playerHeight).toEqual(oldHeight+4);
+      expect(game.createViewPort().playerLocation.row).toEqual(oldHeight-4);
     });
   });
 

@@ -1,3 +1,19 @@
+var HardcodedColumnGenerator = Class.extend({
+  init: function(array) {
+    this.array = array;
+  },
+
+  next: function() {
+    return this.array.shift();
+  }
+});
+
+function containsPoint(collection, point) {
+  return _.any(collection, function(item) {
+    return item.row === point.row && item.col === point.col;
+  });
+}
+
 //test helper method that translates a billion ugly asserts that are hard to read,
 //into a picture that you understand immediately. In the case that an assertion fails,
 //it's probably a little harder to tell exactly what failed...probably.
@@ -16,15 +32,9 @@ function trajectoryExactlyMatches(viewPort, power, expectedTrajectoryString) {
 
   var actualTrajectory = viewPort.trajectory[power];
   expect(actualTrajectory.length).toEqual(expectedTrajectory.length);
-  // if (actualTrajectory.length !== expectedTrajectory.length) {
-  //   return false;
-  // }
 
   for (var i=0; i<expectedTrajectory.length; i++) {
-    expect(actualTrajectory).toContain(expectedTrajectory[i]);
-    // if (!_.contains(actualTrajectory, expectedTrajectory[i])) {
-    //   return false;
-    // }
+    expect(containsPoint(actualTrajectory, expectedTrajectory[i])).toBeTruthy();
   }
 
   return true;
@@ -34,11 +44,11 @@ function trajectoryExactlyMatches(viewPort, power, expectedTrajectoryString) {
 //to the viewPort's position. This function converts relative trajectory points
 //to viewPort-relative points.
 function adjustRelativeTrajectoriesToViewPortPoints(viewPort, map) {
-  var rowOffset = 10 - viewPort.playerHeight;
+  var rowOffset = viewPort.playerLocation.row;
   var columnOffset = 1;
 
   return _.map(map.trajectory, function(point) {
-    return [point[0]+rowOffset, point[1]+columnOffset];
+    return pointRowCol(point.row+rowOffset, point.col+columnOffset);
   });  
 }
 
@@ -53,17 +63,17 @@ function convertTrajectoryMap(expectedTrajectoryString) {
   for (var line =0; line < lines.length; line++) {
     for (var col=0; col<lines[line].length; col++) {
       if (lines[line][col] === 'x') {
-        trajectoryPoints.push([line, col]);
+        trajectoryPoints.push(pointRowCol(line, col));
       } else if (lines[line][col] === '@') {
-        startPoint = [line, col];
+        startPoint = pointRowCol(line, col);
       }
     }
   }
 
   //adjust the raw trajectory points to a "relative distance" from the start point
   _.each(trajectoryPoints, function(point) {
-    point[0] -= startPoint[0];
-    point[1] -= startPoint[1];
+    point.row -= startPoint.row;
+    point.col -= startPoint.col;
   });
 
   return {
@@ -78,6 +88,3 @@ function convertTrajectoryString(token) {
   }  
 }
 
-// beforeEach(function() {
-//   });
-// });

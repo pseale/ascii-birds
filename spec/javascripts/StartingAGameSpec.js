@@ -7,7 +7,7 @@ describe("Starting a new game", function() {
   });
 
   it("starts the player at height 6", function() {
-    expect(viewPort.playerHeight).toEqual(6); //6th row, array offset 5
+    expect(viewPort.playerLocation.row).toEqual(4); //6th row, array offset 5
   });
 
   it("has a row of top-side columns", function() {

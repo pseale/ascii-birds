@@ -1,6 +1,6 @@
-Jasmine2.0.0finished in 0.034s
+Jasmine2.0.0finished in 0.033s
 raise exceptions
-24 specs, 0 failures
+29 specs, 0 failures
 Starting a new game
 starts the player at height 6
 has a row of top-side columns
@@ -40,3 +40,10 @@ creates a 1 power trajectory as a gentle upward slope
 creates a 2 power trajectory as a diagonal upward slope
 creates a 3 power trajectory as a steep, upward slope
 creates a 4 power trajectory as a steep, upward slope
+Colliding with a column
+Colliding with a top column
+tells us we collided
+moves our player to the collision
+tells us the game is over
+disables any further commands
+awards no points

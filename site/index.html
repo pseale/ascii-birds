@@ -27,6 +27,14 @@
     .trajectory {
       background-color: #00FFFF;
     }
+
+    .collision {
+      background-color: #FF0000;
+    }
+
+    #error-report {
+      color: #FF0000;
+    }
   </style>
 </head>
 <body>
@@ -74,27 +82,27 @@ AAAAAAA                   AAAAAAASSSSSSSSSSSSSSS           CCCCCCCCCCCCCIIIIIIII
 
 <div class="small-button" id="button-0">
 <pre>xxx
-x<a id="power-0-flaps" href="#">0</a>x
+x<a id="power-0-move" href="#">0</a>x
 xxx</pre></div>
 
 <div class="small-button"  id="button-1">
 <pre>xxx
-x<a id="power-1-flap" href="#">1</a>x
+x<a id="power-1-move" href="#">1</a>x
 xxx</pre></div>
 
 <div class="small-button"  id="button-2">
 <pre>xxx
-x<a id="power-2-flap" href="#">2</a>x
+x<a id="power-2-move" href="#">2</a>x
 xxx</pre></div>
 
 <div class="small-button"  id="button-3">
 <pre>xxx
-x<a id="power-3-flap" href="#">3</a>x
+x<a id="power-3-move" href="#">3</a>x
 xxx</pre></div>
 
 <div class="small-button"  id="button-4">
 <pre>xxx
-x<a id="power-4-flap" href="#">4</a>x
+x<a id="power-4-move" href="#">4</a>x
 xxx</pre></div>
 
 </div>
@@ -109,10 +117,12 @@ xxxxxxxxxxx</pre>
 x  <a id="quit-button" href="#quit">QUIT</a>   x
 xxxxxxxxxxx</pre>
 </div>
+<div id="error-report"></div>
 
 <script src="javascripts/lib/jquery.min.js"></script>
 <script src="javascripts/lib/underscore-min.js"></script>
 <script src="javascripts/lib/class.js"></script>
+<script src="javascripts/core/SharedFunctions.js"></script>
 <script src="javascripts/core/ColumnGenerator.js"></script>
 <script src="javascripts/core/Column.js"></script>
 <script src="javascripts/core/Game.js"></script>

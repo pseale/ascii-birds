@@ -24,10 +24,6 @@
       screen.push(rowArray);
     }
 
-    var playerRowOffset = 10 - viewPort.playerHeight;
-
-    screen[playerRowOffset][1] = "@";
-
     var topColumnsInView = _.filter(viewPort.topColumns, function(column) { return column < 20 });
     _.each(topColumnsInView, function (column) {
       for(var row=0; row<5; row++) {
@@ -42,9 +38,19 @@
       }
     });
 
+    var token = "";
+    if (viewPort.collided) {
+      token = "<span class='collision'>%</span>";
+    } else {
+      token = "@";
+    }
+
+    screen[viewPort.playerLocation.row][viewPort.playerLocation.col] = token;
+
+
     for (var i=0; i<=4; i++) {
       _.each(viewPort.trajectory[i], function(point) {
-        screen[point[0]][point[1]] = "<span class='trajectory-" + i + "'>" + screen[point[0]][point[1]] + "</span>";
+        screen[point.row][point.col] = "<span class='trajectory-" + i + "'>" + screen[point.row][point.col] + "</span>";
       });
     }
 
@@ -86,8 +92,14 @@
     formatScreen(drawScreen());
   }
 
+
+  //jQuery page bindings
+  window.onerror = function(msg, url, line) {
+    $('#error-report').append('-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-<br />'+  url + ':' + line + '<br />' + msg + "<br />");
+  };
+
   function wireUpButton(power) {
-    $('a#power-' + power + '-flaps').click(function() {
+    $('a#power-' + power + '-move').click(function() {
       move(power);
       return false;
     });
@@ -100,7 +112,6 @@
     });
   }
 
-  //jQuery page bindings
   $(document).ready(function() {
     $('a#start-button').click(function() {
       startGame();
@@ -112,36 +123,10 @@
       return false;
     });
 
-
     wireUpButton(0);
     wireUpButton(1);
     wireUpButton(2);
     wireUpButton(3);
     wireUpButton(4);
-
-    // $('a#power-0-flaps').click(function() {
-    //   move(0);
-    //   return false;
-    // });
-
-    // $('a#power-1-flap').click(function() {
-    //   move(1);
-    //   return false;
-    // });
-
-    // $('a#power-2-flap').click(function() {
-    //   move(2);
-    //   return false;
-    // });
-
-    // $('a#power-3-flap').click(function() {
-    //   move(3);
-    //   return false;
-    // });
-
-    // $('a#power-4-flap').click(function() {
-    //   move(4);
-    //   return false;
-    // });
   });
 })();
