@@ -3,7 +3,7 @@
 describe("Calculating trajectory", function() {
   var viewPort = {};
   beforeEach(function() {
-    var game = new Game();
+    var game = new GameController();
     viewPort = game.createViewPort();
   });
 

@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  var game = new Game();
+  var game = new GameController();
 
   function formatScreen(screenText) {
     var text = "~~~~~~~~~~~~~~~~~~~~~~\n";
@@ -75,7 +75,7 @@
     $('#start-button').hide();
     $('#quit-button').show(); 
     $('#command-bar').show();
-    game = new Game();
+    game = new GameController();
     formatScreen(drawScreen());
     $('#screen').show();
   }

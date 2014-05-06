@@ -1,6 +1,6 @@
 "use strict";
 
-var Game = Class.extend({
+var GameController = Class.extend({
   init: function() {
     this.topColumn = new Column();
     this.bottomColumn = new Column();

@@ -8,7 +8,7 @@ describe("Colliding with a column", function() {
 
       var column = new Column();
       column.columnGenerator = new HardcodedColumnGenerator([2]);
-      game = new Game();
+      game = new GameController();
       game.topColumn = column;
 
       oldViewPort = game.createViewPort(); //awful, do this to modify the lazy column data

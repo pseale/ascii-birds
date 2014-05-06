@@ -2,7 +2,7 @@
 
 describe("Receiving a move command", function() {
   it("moves the player 2 columns over", function() {
-    var game = new Game();
+    var game = new GameController();
     var viewPort = game.createViewPort();
     var firstTopColumn = viewPort.topColumns[0];
 

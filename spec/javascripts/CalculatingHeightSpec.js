@@ -4,7 +4,7 @@ describe("Calculating height", function() {
   var game = {};
   var oldHeight = 0;
   beforeEach(function() {
-    game = new Game();
+    game = new GameController();
     oldHeight = game.createViewPort().playerLocation.row;
   });
 
