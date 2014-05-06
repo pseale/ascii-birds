@@ -4,10 +4,6 @@ var Column = Class.extend({
     this.columns = [];
   },
 
-  generateAColumn: function() {
-    this.columns.push(this.columnGenerator.next());
-  },
-
   stillInRange: function(loc) {
     return _.max(this.columns) <= this.furthestLocationStillInRange(loc)
   },
@@ -16,10 +12,18 @@ var Column = Class.extend({
     return loc + 18;
   },
 
-  findAllNearby: function(loc) {
+  generateAColumn: function() {
+    this.columns.push(this.columnGenerator.next());
+  },
+
+  generateNearbyColumns: function(loc) {
     while (this.stillInRange(loc)) {
       this.generateAColumn();
     }
+  },
+
+  findAllNearby: function(loc) {
+    this.generateNearbyColumns(loc);
 
     var furthest = this.furthestLocationStillInRange(loc);
     return _.filter(this.columns, function(column) {
@@ -28,6 +32,8 @@ var Column = Class.extend({
   },
 
   findCollision: function(trajectory, minRow, maxRow) {
+    this.generateNearbyColumns(trajectory[0].col);
+    
     var cols = this.columns;
     var collisions = [];
 
