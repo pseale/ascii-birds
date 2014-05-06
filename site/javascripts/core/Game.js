@@ -1,13 +1,16 @@
+"use strict";
+
 var Game = Class.extend({
   init: function() {
     this.topColumn = new Column();
     this.bottomColumn = new Column();
+    this.trajectoryCalculator = new TrajectoryCalculator();
 
-    this.playerLocation = pointRowCol(4, 0);
+    this.playerLocation = pointRowCol(4, 0); //starting point of game
     this.collided = false;
     this.gameOver = false;
     this.points = 0;
-    this.scrollLocation = -1;
+    this.scrollLocation = -1; //game starts displaying player 1 away from left side of screen
   },
 
   getColumnsInRange: function(column) {
@@ -15,28 +18,6 @@ var Game = Class.extend({
     return _.map(column.findAllNearby(this.playerLocation.col), function(col) { 
       return col - loc;
     });
-  },
-
-  adjust: function(points) {
-    var rowOffset = this.playerLocation.row;
-    var columnOffset = this.playerLocation.col;
-    var points = _.map(points, function(point) {
-      return pointRowCol(point.row+rowOffset, point.col+columnOffset);
-    });
-
-    return _.filter(points, function(point) {
-      return point.isLegal();
-    });
-  },
-
-  createTrajectory: function() {
-    return [
-      this.adjust(this.power0Trajectory),
-      this.adjust(this.power1Trajectory),
-      this.adjust(this.power2Trajectory),
-      this.adjust(this.power3Trajectory),
-      this.adjust(this.power4Trajectory),
-    ];
   },
 
   shiftTrajectoriesForViewPort: function(trajectories) {
@@ -62,9 +43,9 @@ var Game = Class.extend({
   },
 
   createViewPort: function() {
-    viewPort = {
+    var viewPort = {
       playerLocation: this.shiftForViewPort(this.playerLocation),
-      trajectory: this.shiftTrajectoriesForViewPort(this.createTrajectory()),
+      trajectory: this.shiftTrajectoriesForViewPort(this.trajectoryCalculator.getTrajectories(this.playerLocation)),
       topColumns: this.getColumnsInRange(this.topColumn),
       bottomColumns: this.getColumnsInRange(this.bottomColumn),
       collided: this.collided,
@@ -83,34 +64,6 @@ var Game = Class.extend({
     4: 4,
   },
 
-  power0Trajectory: [
-    pointRowCol(1, 1),
-    pointRowCol(2, 2),
-  ],
-
-  power1Trajectory: [
-    pointRowCol(0, 1),
-    pointRowCol(-1, 2),
-  ],
-
-  power2Trajectory: [
-    pointRowCol(-1, 1),
-    pointRowCol(-2, 2),
-  ],
-
-  power3Trajectory: [
-    pointRowCol(-1, 1),
-    pointRowCol(-2, 1),
-    pointRowCol(-3, 2),
-  ],
-
-  power4Trajectory: [
-    pointRowCol(-1, 1),
-    pointRowCol(-2, 1),
-    pointRowCol(-3, 2),
-    pointRowCol(-4, 2),
-  ],
-
   move: function(power) {
     if (!(power in this.lift)) {
       throw new Error("Invalid 'power', expected power 0-4, got: " + power);
@@ -120,7 +73,7 @@ var Game = Class.extend({
       throw new Error("Game over, cannot perform any action.");
     }
 
-    var trajectory = this.createTrajectory()[power];
+    var trajectory = this.trajectoryCalculator.getTrajectory(this.playerLocation, power);
     var topCollision = this.topColumn.findCollision(trajectory, 0, 4);
     if (topCollision.collided) {
       this.collided = true;
