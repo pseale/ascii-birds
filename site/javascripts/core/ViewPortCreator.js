@@ -5,42 +5,40 @@ var ViewPortCreator = Class.extend({
     this.trajectoryCalculator = new TrajectoryCalculator();
   },
 
-  getColumnsInRange: function(scrollLocation, playerLocation, column) {
+  findPillarsInViewPort: function(scrollLocation, playerLocation, column) {
     return _.map(column.findAllNearby(playerLocation.col), function(col) { 
       return col - scrollLocation;
     });
   },
 
   shiftTrajectoriesForViewPort: function(scrollLocation, trajectories) {
+    //refactor out these awful temp arrays when I switch out from underscore to lo-dash
     var newTrajectories = [];
     for (var i=0; i<trajectories.length; i++) {
-      newTrajectories.push(this.shiftArrayForViewPort(scrollLocation, trajectories[i]));
+      var newTrajectory = [];
+
+      for (var j=0; j<trajectories[i].length; j++) {
+        newTrajectory.push(this.shiftLocationForViewPort(scrollLocation, trajectories[i][j]));
+      }
+
+      newTrajectories.push(newTrajectory);
     }
 
     return newTrajectories;
   },
 
-  shiftArrayForViewPort: function(scrollLocation, array) {
-    var newArray = [];
-    for (var i=0; i<array.length; i++) {
-      newArray.push(this.shiftForViewPort(scrollLocation, array[i]));
-    }
-
-    return newArray;
-  },
-
-  shiftForViewPort: function(scrollLocation, point) {
+  shiftLocationForViewPort: function(scrollLocation, point) {
     return pointRowCol(point.row, point.col - scrollLocation);
   },
 
   create: function(scrollLocation, playerLocation, topColumn, bottomColumn, collided, gameOver, points) {
     var viewPort = {
-      playerLocation: this.shiftForViewPort(scrollLocation, playerLocation),
+      playerLocation: this.shiftLocationForViewPort(scrollLocation, playerLocation),
       trajectory: this.shiftTrajectoriesForViewPort(
         scrollLocation, 
         this.trajectoryCalculator.getTrajectories(playerLocation)),
-      topColumns: this.getColumnsInRange(scrollLocation, playerLocation, topColumn),
-      bottomColumns: this.getColumnsInRange(scrollLocation, playerLocation, bottomColumn),
+      topColumns: this.findPillarsInViewPort(scrollLocation, playerLocation, topColumn),
+      bottomColumns: this.findPillarsInViewPort(scrollLocation, playerLocation, bottomColumn),
       collided: collided,
       gameOver: gameOver,
       points: points,
@@ -48,5 +46,4 @@ var ViewPortCreator = Class.extend({
 
     return viewPort;
   },
-
 });
