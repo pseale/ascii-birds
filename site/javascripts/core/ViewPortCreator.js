@@ -37,7 +37,7 @@ var ViewPortCreator = Class.extend({
     return pointRowCol(point.row, point.col - scrollLocation);
   },
 
-  create: function(scrollLocation, playerLocation, topColumn, bottomColumn, collided, outOfBounds, gameOver, points) {
+  create: function(scrollLocation, playerLocation, topColumn, bottomColumn, collided, outOfBounds, gameOver, score) {
     var topColumns = this.findPillarsInViewPort(scrollLocation, topColumn);
     var bottomColumns = this.findPillarsInViewPort(scrollLocation, bottomColumn);
 
@@ -48,7 +48,7 @@ var ViewPortCreator = Class.extend({
         collided: collided,
         outOfBounds: outOfBounds,
         gameOver: gameOver,
-        points: points,
+        score: score,
       };
     };
 
@@ -62,7 +62,7 @@ var ViewPortCreator = Class.extend({
       collided: collided,
       outOfBounds: outOfBounds,
       gameOver: gameOver,
-      points: points,
+      score: score,
     };
   },
 });

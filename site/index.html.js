@@ -69,6 +69,24 @@
     return screenText;
   }
 
+  function drawScore(screenText, score) {
+    if (score > 999) {
+      score = 999;
+    }
+
+    var width = 5;
+    var scoreString = score.toString() + " ";
+    while(scoreString.length < width - 1) {
+      scoreString = "0" + scoreString;
+    }
+
+    if (scoreString.length < width) {
+      scoreString = " " + scoreString;
+    }
+
+    screenText[0] = screenText[0].substring(0, screenText[0].length-width) + "<span class='scoreboard'>" + scoreString + "</span>";
+  }
+
   function drawScreen() {
     var viewPort = game.createViewPort();
     var screen = createEmptyScreen();
@@ -86,6 +104,9 @@
     }
 
     var screenText = convertScreenArrayToText(screen);
+
+    //draw "overlays" or "windows" over the rest of the screen
+    drawScore(screenText, viewPort.score);
     if (viewPort.gameOver) {
       screenText[5] = "<span class='game-over-alert'> ::: GAME  OVER ::: </span>"
     }
