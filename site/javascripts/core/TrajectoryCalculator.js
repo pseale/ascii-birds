@@ -28,12 +28,9 @@ var TrajectoryCalculator = Class.extend({
   convertRelativeToActualCoordinates: function(playerLocation, trajectory) {
     var rowOffset = playerLocation.row;
     var columnOffset = playerLocation.col;
-    var actualTrajectory = _.map(trajectory, function(point) {
+    
+    return _.map(trajectory, function(point) {
       return pointRowCol(point.row + rowOffset, point.col + columnOffset);
-    });
-
-    return _.filter(actualTrajectory, function(point) {
-      return point.isLegal();
     });
   },
 

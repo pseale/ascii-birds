@@ -8,6 +8,7 @@ var GameController = Class.extend({
 
     this.playerLocation = pointRowCol(4, 0); //starting point of game
     this.collided = false;
+    this.outOfBounds = false;
     this.gameOver = false;
     this.points = 0;
     this.scrollLocation = -1; //game starts displaying player 1 away from left side of screen
@@ -20,6 +21,7 @@ var GameController = Class.extend({
       this.topColumn,
       this.bottomColumn,
       this.collided,
+      this.outOfBounds,
       this.gameOver,
       this.points
       );
@@ -45,6 +47,7 @@ var GameController = Class.extend({
 
     this.playerLocation = result.playerLocation;
     this.collided = result.collided;
+    this.outOfBounds = result.outOfBounds;
     this.gameOver = result.gameOver;
     if (!this.gameOver) {
       this.scrollLocation += 2;

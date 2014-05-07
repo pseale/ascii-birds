@@ -39,24 +39,26 @@
       }
     });
 
-    var token = "";
-    if (viewPort.collided) {
-      token = "<span class='collision'>%</span>";
-    } else {
-      token = "@";
-    }
+    if (!viewPort.outOfBounds) {
+      var token = "";
+      if (viewPort.collided) {
+        token = "<span class='collision'>%</span>";
+      } else {
+        token = "@";
+      }
 
-    screen[viewPort.playerLocation.row][viewPort.playerLocation.col] = token;
+      screen[viewPort.playerLocation.row][viewPort.playerLocation.col] = token;
 
+      for (var i=0; i<=4; i++) {
+        _.each(viewPort.trajectory[i], function(point) {
+          screen[point.row][point.col] = "<span class='trajectory-" + i + "'>" + screen[point.row][point.col] + "</span>";
+        });
+      }
 
-    for (var i=0; i<=4; i++) {
-      _.each(viewPort.trajectory[i], function(point) {
-        screen[point.row][point.col] = "<span class='trajectory-" + i + "'>" + screen[point.row][point.col] + "</span>";
+      _.each(viewPort.trajectory, function(points) {
       });
     }
 
-    _.each(viewPort.trajectory, function(points) {
-    });
     var screenText = [];
 
     _.each(screen, function(row) {
