@@ -14,9 +14,9 @@
      $('#screen').html(text);
   }
 
-  function drawScreen() {
-    var viewPort = game.createViewPort();
+  function createEmptyScreen() {
     var screen = [];
+
     for (var row=0; row<10; row++) {
       var rowArray = [];
       for (var col=0; col<20; col++) {
@@ -25,42 +25,39 @@
       screen.push(rowArray);
     }
 
-    var topColumnsInView = _.filter(viewPort.topColumns, function(column) { return column < 20 });
-    _.each(topColumnsInView, function (column) {
-      for(var row=0; row<5; row++) {
-        screen[row][column] = "#";
+    return screen;
+  }
+
+  function drawPillar(screen, pillarArray, minRow, maxRow) {
+    var pillarsInView = _.filter(pillarArray, function(pillar) { return pillar < 20 });
+    _.each(pillarsInView, function (pillar) {
+      for(var row=minRow; row<=maxRow; row++) {
+        screen[row][pillar] = "#";
       }
     });
+  }
 
-    var bottomColumnsInView = _.filter(viewPort.bottomColumns, function(column) { return column < 20 });
-    _.each(bottomColumnsInView, function (column) {
-      for(var row=9; row>5; row--) {
-        screen[row][column] = "#";
-      }
-    });
-
-    if (!viewPort.outOfBounds) {
-      var token = "";
-      if (viewPort.collided) {
-        token = "<span class='collision'>%</span>";
-      } else {
-        token = "@";
-      }
-
-      screen[viewPort.playerLocation.row][viewPort.playerLocation.col] = token;
-
-      for (var i=0; i<=4; i++) {
-        _.each(viewPort.trajectory[i], function(point) {
-          screen[point.row][point.col] = "<span class='trajectory-" + i + "'>" + screen[point.row][point.col] + "</span>";
-        });
-      }
-
-      _.each(viewPort.trajectory, function(points) {
-      });
+  function drawPlayer(screen, viewPort) {
+    var token = "";
+    if (viewPort.collided) {
+      token = "<span class='collision'>%</span>";
+    } else {
+      token = "@";
     }
 
-    var screenText = [];
+    screen[viewPort.playerLocation.row][viewPort.playerLocation.col] = token;
+  }
 
+  function drawTrajectories(screen, trajectories) {
+    for (var i=0; i<=4; i++) {
+      _.each(trajectories[i], function(point) {
+        screen[point.row][point.col] = "<span class='trajectory-" + i + "'>" + screen[point.row][point.col] + "</span>";
+      });
+    }
+  }
+
+  function convertScreenArrayToText(screen) {
+    var screenText = [];
     _.each(screen, function(row) {
       var rowText = "";
       for (var i=0;i<row.length; i++) {
@@ -68,6 +65,30 @@
       }
       screenText.push(rowText);
     });
+
+    return screenText;
+  }
+
+  function drawScreen() {
+    var viewPort = game.createViewPort();
+    var screen = createEmptyScreen();
+
+    drawPillar(screen, viewPort.topColumns, 0, 4);
+
+    drawPillar(screen, viewPort.bottomColumns, 6, 9);
+
+    if (!viewPort.outOfBounds) {
+      drawPlayer(screen, viewPort);
+
+      if (!viewPort.gameOver) {
+        drawTrajectories(screen, viewPort.trajectory);
+      }
+    }
+
+    var screenText = convertScreenArrayToText(screen);
+    if (viewPort.gameOver) {
+      screenText[5] = "<span class='game-over-alert'> ::: GAME  OVER ::: </span>"
+    }
 
     return screenText;
   }
