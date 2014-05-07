@@ -37,7 +37,7 @@ describe("Colliding with a column", function() {
 
     it("awards no points", function() {
       var viewPort = game.createViewPort();
-      expect(viewPort.points).toEqual(0); 
+      expect(viewPort.score).toEqual(0); 
     });
   });
 });

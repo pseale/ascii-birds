@@ -7,6 +7,7 @@ var MoveCommand = Class.extend({
       outOfBounds: false,
       gameOver: true,
       playerLocation: collision.point,
+      scoreToAdd: 0,
     };
   },
 
@@ -15,6 +16,7 @@ var MoveCommand = Class.extend({
       collided: false,
       outOfBounds: true,
       gameOver: true,
+      scoreToAdd: 0,
     };
   },
 
@@ -24,6 +26,7 @@ var MoveCommand = Class.extend({
       outOfBounds: false,
       gameOver: false,
       playerLocation: trajectory[trajectory.length-1],
+      scoreToAdd: 0,
     };
   },
 

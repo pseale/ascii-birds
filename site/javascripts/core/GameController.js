@@ -49,6 +49,8 @@ var GameController = Class.extend({
     this.collided = result.collided;
     this.outOfBounds = result.outOfBounds;
     this.gameOver = result.gameOver;
+    this.score += result.scoreToAdd;
+
     if (!this.gameOver) {
       this.scrollLocation += 2;
     }
