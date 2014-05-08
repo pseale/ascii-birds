@@ -4,7 +4,8 @@
   <link rel="stylesheet" href="reset.css" />
   <style>
     .button {
-      clear: left
+      clear: left;
+      cursor: pointer;
     }
 
     body {
@@ -22,6 +23,7 @@
     .small-button {
       float: left;
       margin: 3px;
+      cursor: pointer;
     }
 
     .trajectory {
@@ -44,6 +46,11 @@
     .scoreboard {
       color: #FFFF00;
       background-color: #000000;
+    }
+
+    .looks-like-hyperlink {
+      color: blue;
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -90,41 +97,41 @@ AAAAAAA                   AAAAAAASSSSSSSSSSSSSSS           CCCCCCCCCCCCCIIIIIIII
 </pre>
 <div id="command-bar">
 
-<div class="small-button" id="button-0">
+<div class="small-button" id="power-0-move">
 <pre>xxx
-x<a id="power-0-move" href="#">0</a>x
+x<span class='looks-like-hyperlink'>0</span>x
 xxx</pre></div>
 
-<div class="small-button"  id="button-1">
+<div class="small-button"  id="power-1-move">
 <pre>xxx
-x<a id="power-1-move" href="#">1</a>x
+x<span class='looks-like-hyperlink'>1</span>x
 xxx</pre></div>
 
-<div class="small-button"  id="button-2">
+<div class="small-button"  id="power-2-move">
 <pre>xxx
-x<a id="power-2-move" href="#">2</a>x
+x<span class='looks-like-hyperlink'>2</span>x
 xxx</pre></div>
 
-<div class="small-button"  id="button-3">
+<div class="small-button"  id="power-3-move">
 <pre>xxx
-x<a id="power-3-move" href="#">3</a>x
+x<span class='looks-like-hyperlink'>3</span>x
 xxx</pre></div>
 
-<div class="small-button"  id="button-4">
+<div class="small-button"  id="power-4-move">
 <pre>xxx
-x<a id="power-4-move" href="#">4</a>x
+x<span class='looks-like-hyperlink'>4</span>x
 xxx</pre></div>
 
 </div>
 <div id="start-button" class="button">
   <pre>xxxxxxxxxxx
-x  <a id="start-button" href="#start">START</a>  x
+x  <span class='looks-like-hyperlink'>START</span>  x
 xxxxxxxxxxx</pre>
 </div>
 <br />
 <div id="quit-button" class="button">
   <pre>xxxxxxxxxxx
-x  <a id="quit-button" href="#quit">QUIT</a>   x
+x  <span class='looks-like-hyperlink'>QUIT</span>   x
 xxxxxxxxxxx</pre>
 </div>
 <div id="error-report"></div>

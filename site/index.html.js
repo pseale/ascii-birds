@@ -61,12 +61,13 @@
   };
 
   function wireUpButton(power) {
-    $('a#power-' + power + '-move').click(function() {
+    var buttonSelector = '#power-' + power + '-move';
+    $(buttonSelector).click(function() {
       move(power);
       return false;
     });
 
-    $('#button-' + power).hover(function() {
+    $(buttonSelector).hover(function() {
       $('span.trajectory-' + power).addClass('trajectory');
     }, 
     function() {
@@ -75,12 +76,12 @@
   }
 
   $(document).ready(function() {
-    $('a#start-button').click(function() {
+    $('#start-button').click(function() {
       startGame();
       return false;
     });  
 
-    $('a#quit-button').click(function() {
+    $('#quit-button').click(function() {
       quitGame();
       return false;
     });
