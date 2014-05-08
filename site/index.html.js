@@ -2,6 +2,7 @@
   "use strict";
 
   var game = new GameController();
+  var isInGame = false;
 
   function formatBorder(screenText) {
     var text = "~~~~~~~~~~~~~~~~~~~~~~\n";
@@ -31,6 +32,10 @@
   }
 
   function startGame() {
+    if (isInGame) {
+      return;
+    }
+    isInGame = true;
     $('#title').hide();
     $('#start-button').hide();
     $('#quit-button').show(); 
@@ -42,14 +47,21 @@
   }
 
   function quitGame() {
+    if (!isInGame) {
+      return;
+    }
     $('#title').show();
     $('#start-button').show();
     $('#quit-button').hide(); 
     $('#command-bar').hide();
     $('#screen').hide();
+    isInGame = false;
   }
 
   function move(power) {
+    if (!isInGame) {
+      return;
+    }
     game.move(power);
     drawScreen(game);
   }
@@ -60,7 +72,7 @@
     $('#error-report').append('-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-<br />'+  url + ':' + line + '<br />' + msg + "<br />");
   };
 
-  function wireUpButton(power) {
+  function wireUpButton(power, keys) {
     var buttonSelector = '#power-' + power + '-move';
     $(buttonSelector).click(function() {
       move(power);
@@ -72,6 +84,10 @@
     }, 
     function() {
       $('span.trajectory-' + power).removeClass('trajectory');
+    });
+
+    _.each(keys, function(key) {
+      Mousetrap.bind(key, function() { move(power); });
     });
   }
 
@@ -86,10 +102,21 @@
       return false;
     });
 
-    wireUpButton(0);
-    wireUpButton(1);
-    wireUpButton(2);
-    wireUpButton(3);
-    wireUpButton(4);
+    Mousetrap.bind('q', quitGame);
+    Mousetrap.bind('space', function() {
+      if (isInGame) {
+        move(0);
+      } else {
+        startGame();
+      }
+    });
+    Mousetrap.bind('n', startGame);
+    Mousetrap.bind('s', startGame);
+
+    wireUpButton(0, ['`', '~', '0']);
+    wireUpButton(1, ['1']);
+    wireUpButton(2, ['2']);
+    wireUpButton(3, ['3']);
+    wireUpButton(4, ['4']);
   });
 })();
