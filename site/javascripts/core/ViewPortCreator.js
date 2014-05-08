@@ -38,31 +38,24 @@ var ViewPortCreator = Class.extend({
   },
 
   create: function(scrollLocation, playerLocation, topPillar, bottomPillar, collided, outOfBounds, gameOver, score) {
-    var topPillars = this.findPillarsInViewPort(scrollLocation, topPillar);
-    var bottomPillars = this.findPillarsInViewPort(scrollLocation, bottomPillar);
-
-    if (playerLocation === undefined) {
-      return {
-        topPillars: topPillars,
-        bottomPillars: bottomPillars,
-        collided: collided,
-        outOfBounds: outOfBounds,
-        gameOver: gameOver,
-        score: score,
-      };
-    };
-
-    return {
-      playerLocation: this.shiftLocationForViewPort(scrollLocation, playerLocation),
-      trajectory: this.shiftTrajectoriesForViewPort(
-        scrollLocation, 
-        this.trajectoryCalculator.getTrajectories(playerLocation)),
-      topPillars: topPillars,
-      bottomPillars: bottomPillars,
+    var result = {
+      topPillars: this.findPillarsInViewPort(scrollLocation, topPillar),
+      bottomPillars: this.findPillarsInViewPort(scrollLocation, bottomPillar),
       collided: collided,
       outOfBounds: outOfBounds,
       gameOver: gameOver,
       score: score,
     };
+
+    if (playerLocation === undefined) {
+      return result;
+    };
+
+    return _.extend(result, {
+      playerLocation: this.shiftLocationForViewPort(scrollLocation, playerLocation),
+      trajectory: this.shiftTrajectoriesForViewPort(
+        scrollLocation, 
+        this.trajectoryCalculator.getTrajectories(playerLocation)),
+    });
   },
 });
