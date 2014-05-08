@@ -11,7 +11,7 @@ var Pillar = Class.extend({
   },
 
   furthestLocationStillInRange: function(loc) {
-    return loc + 18;
+    return loc + AsciiBirds.windowWidth - AsciiBirds.playerLocationInWindow;
   },
 
   generateAPillar: function() {
@@ -29,7 +29,7 @@ var Pillar = Class.extend({
 
     var furthest = this.furthestLocationStillInRange(loc);
     return _.filter(this.pillars, function(pillar) {
-      return pillar > loc - 2 && furthest >= pillar; 
+      return pillar > loc - AsciiBirds.playerLocationInWindow && furthest >= pillar; 
     });
   },
 

@@ -51,7 +51,7 @@ var GameController = Class.extend({
     this.score += result.scoreToAdd;
 
     if (!this.gameOver) {
-      this.scrollLocation += 2;
+      this.scrollLocation += AsciiBirds.moveSpeed;
     }
   },
 });

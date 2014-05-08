@@ -17,9 +17,9 @@
   function createEmptyScreen() {
     var screen = [];
 
-    for (var row=0; row<10; row++) {
+    for (var row=0; row<AsciiBirds.windowHeight; row++) {
       var rowArray = [];
-      for (var col=0; col<20; col++) {
+      for (var col=0; col<AsciiBirds.windowWidth; col++) {
         rowArray.push("\u00B7"); //Unicode character is an 'Interpunct': http://en.wikipedia.org/wiki/Interpunct
       }
       screen.push(rowArray);
@@ -29,7 +29,7 @@
   }
 
   function drawPillar(screen, pillarArray, minRow, maxRow) {
-    var pillarsInView = _.filter(pillarArray, function(pillar) { return pillar < 20 });
+    var pillarsInView = _.filter(pillarArray, function(pillar) { return pillar < AsciiBirds.windowWidth });
     _.each(pillarsInView, function (pillar) {
       for(var row=minRow; row<=maxRow; row++) {
         screen[row][pillar] = "#";
@@ -49,7 +49,7 @@
   }
 
   function drawTrajectories(screen, trajectories) {
-    for (var i=0; i<=4; i++) {
+    for (var i=0; i<trajectories.length; i++) {
       _.each(trajectories[i], function(point) {
         screen[point.row][point.col] = "<span class='trajectory-" + i + "'>" + screen[point.row][point.col] + "</span>";
       });
@@ -91,9 +91,9 @@
     var viewPort = game.createViewPort();
     var screen = createEmptyScreen();
 
-    drawPillar(screen, viewPort.topPillars, 0, 4);
+    drawPillar(screen, viewPort.topPillars, AsciiBirds.topPillarMinRow, AsciiBirds.topPillarMaxRow);
 
-    drawPillar(screen, viewPort.bottomPillars, 6, 9);
+    drawPillar(screen, viewPort.bottomPillars, AsciiBirds.bottomPillarMinRow, AsciiBirds.bottomPillarMaxRow);
 
     if (!viewPort.outOfBounds) {
       drawPlayer(screen, viewPort);

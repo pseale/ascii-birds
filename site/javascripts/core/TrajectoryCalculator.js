@@ -3,21 +3,21 @@
 var TrajectoryCalculator = Class.extend({
   init: function() {
     this.relativeTrajectories = [
-      this.power0,
-      this.power1,
-      this.power2,
-      this.power3,
-      this.power4,
+      AsciiBirds.TrajectoryVectors.power0,
+      AsciiBirds.TrajectoryVectors.power1,
+      AsciiBirds.TrajectoryVectors.power2,
+      AsciiBirds.TrajectoryVectors.power3,
+      AsciiBirds.TrajectoryVectors.power4,
       ];
   },
 
   getTrajectories: function(playerLocation) {
     return [
-      this.convertRelativeToActualCoordinates(playerLocation, this.power0),
-      this.convertRelativeToActualCoordinates(playerLocation, this.power1),
-      this.convertRelativeToActualCoordinates(playerLocation, this.power2),
-      this.convertRelativeToActualCoordinates(playerLocation, this.power3),
-      this.convertRelativeToActualCoordinates(playerLocation, this.power4),
+      this.convertRelativeToActualCoordinates(playerLocation, AsciiBirds.TrajectoryVectors.power0),
+      this.convertRelativeToActualCoordinates(playerLocation, AsciiBirds.TrajectoryVectors.power1),
+      this.convertRelativeToActualCoordinates(playerLocation, AsciiBirds.TrajectoryVectors.power2),
+      this.convertRelativeToActualCoordinates(playerLocation, AsciiBirds.TrajectoryVectors.power3),
+      this.convertRelativeToActualCoordinates(playerLocation, AsciiBirds.TrajectoryVectors.power4),
     ];
   },
 
@@ -33,32 +33,4 @@ var TrajectoryCalculator = Class.extend({
       return pointRowCol(point.row + rowOffset, point.col + columnOffset);
     });
   },
-
-  power0: [
-    pointRowCol(1, 1),
-    pointRowCol(2, 2),
-  ],
-
-  power1: [
-    pointRowCol(0, 1),
-    pointRowCol(-1, 2),
-  ],
-
-  power2: [
-    pointRowCol(-1, 1),
-    pointRowCol(-2, 2),
-  ],
-
-  power3: [
-    pointRowCol(-1, 1),
-    pointRowCol(-2, 1),
-    pointRowCol(-3, 2),
-  ],
-
-  power4: [
-    pointRowCol(-1, 1),
-    pointRowCol(-2, 1),
-    pointRowCol(-3, 2),
-    pointRowCol(-4, 2),
-  ],
 });

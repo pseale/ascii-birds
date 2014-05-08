@@ -6,7 +6,7 @@ var PillarGenerator = Class.extend({
   },
 
   next: function() {
-    this.offset += _.random(7, 10);
+    this.offset += _.random(AsciiBirds.pillarDistanceMin, AsciiBirds.pillarDistanceMax);
 
     return this.offset;
   },
