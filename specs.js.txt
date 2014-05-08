@@ -1,6 +1,6 @@
-Jasmine2.0.0finished in 0.033s
+Jasmine2.0.0finished in 0.04s
 raise exceptions
-29 specs, 0 failures
+33 specs, 0 failures
 Starting a new game
 starts the player at height 6
 has a row of top-side columns
@@ -47,3 +47,12 @@ moves our player to the collision
 tells us the game is over
 disables any further commands
 awards no points
+Keeping score
+Moving but not crossing or reaching a pillar
+awards no points
+Moving immediately under a pillar without colliding
+awards a point
+Moving past a pillar without colliding
+awards a point
+Moving past both top and bottom pillars in one move
+awards two points

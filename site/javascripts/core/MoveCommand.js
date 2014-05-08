@@ -20,13 +20,13 @@ var MoveCommand = Class.extend({
     };
   },
 
-  createMoveResult: function(trajectory) {
+  createMoveResult: function(trajectory, scoreToAdd) {
     return {
       collided: false,
       outOfBounds: false,
       gameOver: false,
       playerLocation: trajectory[trajectory.length-1],
-      scoreToAdd: 0,
+      scoreToAdd: scoreToAdd,
     };
   },
 
@@ -49,6 +49,15 @@ var MoveCommand = Class.extend({
       return this.outOfBoundsResult();
     }
 
-    return this.createMoveResult(trajectory);
+    var scoreToAdd = 0;
+
+    if(topColumn.crossedBy(trajectory)) {
+      scoreToAdd++;
+    }
+    if(bottomColumn.crossedBy(trajectory)) {
+      scoreToAdd++;
+    }
+    
+    return this.createMoveResult(trajectory, scoreToAdd);
   },  
 });

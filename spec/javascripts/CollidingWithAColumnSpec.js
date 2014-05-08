@@ -5,11 +5,7 @@ describe("Colliding with a column", function() {
     var game = {};
     var oldViewPort = {};
     beforeEach(function() {
-
-      var column = new Column();
-      column.columnGenerator = new HardcodedColumnGenerator([2]);
-      game = new GameController();
-      game.topColumn = column;
+      game = ObjectMother.createGameWithHardcodedTopPillars([2]);
 
       oldViewPort = game.createViewPort(); //awful, do this to modify the lazy column data
       game.move(4);

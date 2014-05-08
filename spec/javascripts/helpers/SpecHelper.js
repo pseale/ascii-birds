@@ -10,6 +10,30 @@ var HardcodedColumnGenerator = Class.extend({
   }
 });
 
+var ObjectMother = {
+  createGameWithHardcodedTopPillars: function(pillarArray) {
+    return this.createGameWithHardcodedPillars(pillarArray, [500]);
+  },
+
+  createGameWithHardcodedPillars: function(topPillarArray, bottomPillarArray) {
+    if (topPillarArray === null || topPillarArray.length === 0 || bottomPillarArray === null || bottomPillarArray.length === 0 ) {
+      throw new Error("Test setup error: can't create a hardcoded game with no pillars whatsoever. If you don't want pillars in your game, create pillars far away (e.g. pillar at location 500)");
+    }
+
+    var game = new GameController();
+
+    var topColumn = new Column();
+    topColumn.columnGenerator = new HardcodedColumnGenerator(topPillarArray);
+    game.topColumn = topColumn;
+
+    var emptyBottomColumn = new Column();
+    emptyBottomColumn.columnGenerator = new HardcodedColumnGenerator(bottomPillarArray);
+    game.bottomColumn = emptyBottomColumn;
+
+    return game;
+  },
+};
+
 function containsPoint(collection, point) {
   return _.any(collection, function(item) {
     return item.row === point.row && item.col === point.col;

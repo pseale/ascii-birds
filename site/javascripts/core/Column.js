@@ -54,4 +54,13 @@ var Column = Class.extend({
 
     return { collided: false, };
   },
+
+  crossedBy: function(trajectory) {
+    var startColumn = trajectory[0].col;
+    var endColumn = trajectory[trajectory.length-1].col;
+
+    return _.any(this.columns, function(loc) {
+      return loc >= startColumn && loc <= endColumn;
+    });
+  },
 });
