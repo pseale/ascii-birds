@@ -11,6 +11,7 @@ var GameController = Class.extend({
     this.outOfBounds = false;
     this.gameOver = false;
     this.score = 0;
+    this.justScored = false;
     this.scrollLocation = -1; //game starts displaying player 1 away from left side of screen
   },
 
@@ -23,7 +24,8 @@ var GameController = Class.extend({
       this.collided,
       this.outOfBounds,
       this.gameOver,
-      this.score
+      this.score,
+      this.justScored
       );
   },
 
@@ -49,6 +51,11 @@ var GameController = Class.extend({
     this.outOfBounds = result.outOfBounds;
     this.gameOver = result.gameOver;
     this.score += result.scoreToAdd;
+    if (result.scoreToAdd > 0) {
+      this.justScored = true;
+    } else {
+      this.justScored =false;
+    }
 
     if (!this.gameOver) {
       this.scrollLocation += AsciiBirds.moveSpeed;

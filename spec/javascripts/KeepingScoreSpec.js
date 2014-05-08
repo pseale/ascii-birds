@@ -2,14 +2,19 @@
 
 describe("Keeping score", function() {
   describe("Moving but not crossing or reaching a pillar", function() {
-    var game = {};
+    var viewPort = {};
     beforeEach(function() {
-      game = ObjectMother.createGameWithHardcodedTopPillars([50]);
+      var game = ObjectMother.createGameWithHardcodedTopPillars([50]);
       game.move(1);
+      viewPort = game.createViewPort();
     });
 
     it("awards no points", function() {
-      expect(game.createViewPort().score).toEqual(0);
+      expect(viewPort.score).toEqual(0);
+    });
+
+    it("indicates we have not just scored", function() {
+      expect(viewPort.justScored).toBeFalsy();
     });
   });
 
@@ -26,6 +31,10 @@ describe("Keeping score", function() {
 
     it("awards a point", function() {
       expect(viewPort.score).toEqual(1);
+    });
+
+    it("indicates we just scored", function() {
+      expect(viewPort.justScored).toBeTruthy();
     });
   });
 
@@ -44,6 +53,10 @@ describe("Keeping score", function() {
     it("awards a point", function() {
       expect(viewPort.score).toEqual(1);
     });
+
+    it("indicates we just scored", function() {
+      expect(viewPort.justScored).toBeTruthy();
+    });
   });
 
   describe("Moving past both top and bottom pillars in one move", function() {
@@ -59,6 +72,10 @@ describe("Keeping score", function() {
 
     it("awards two points", function() {
       expect(viewPort.score).toEqual(2);
+    });
+
+    it("indicates we just scored", function() {
+      expect(viewPort.justScored).toBeTruthy();
     });
   });
 });
