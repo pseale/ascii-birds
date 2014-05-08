@@ -110,7 +110,7 @@
 
     Mousetrap.bind('q', quitGame);
     Mousetrap.bind('space', function() {
-      if (isInGame) {
+      if (isInGame && canMove) {
         move(0);
       } else {
         startGame();
