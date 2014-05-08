@@ -1,6 +1,6 @@
 "use strict";
 
-var ColumnGenerator = Class.extend({
+var PillarGenerator = Class.extend({
   init: function() {
     this.offset = 0;
   },

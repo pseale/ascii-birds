@@ -1,46 +1,46 @@
 "use strict";
 
-var Column = Class.extend({
+var Pillar = Class.extend({
   init: function() {
-    this.columnGenerator = new ColumnGenerator();
-    this.columns = [];
+    this.pillarGenerator = new PillarGenerator();
+    this.pillars = [];
   },
 
   stillInRange: function(loc) {
-    return _.max(this.columns) <= this.furthestLocationStillInRange(loc)
+    return _.max(this.pillars) <= this.furthestLocationStillInRange(loc)
   },
 
   furthestLocationStillInRange: function(loc) {
     return loc + 18;
   },
 
-  generateAColumn: function() {
-    this.columns.push(this.columnGenerator.next());
+  generateAPillar: function() {
+    this.pillars.push(this.pillarGenerator.next());
   },
 
-  generateNearbyColumns: function(loc) {
+  generateNearbyPillars: function(loc) {
     while (this.stillInRange(loc)) {
-      this.generateAColumn();
+      this.generateAPillar();
     }
   },
 
   findAllNearby: function(loc) {
-    this.generateNearbyColumns(loc);
+    this.generateNearbyPillars(loc);
 
     var furthest = this.furthestLocationStillInRange(loc);
-    return _.filter(this.columns, function(column) {
-      return column > loc - 2 && furthest >= column; 
+    return _.filter(this.pillars, function(pillar) {
+      return pillar > loc - 2 && furthest >= pillar; 
     });
   },
 
   findCollision: function(trajectory, minRow, maxRow) {
-    this.generateNearbyColumns(trajectory[0].col);
+    this.generateNearbyPillars(trajectory[0].col);
     
-    var cols = this.columns;
+    var pillarsArray = this.pillars;
     var collisions = [];
 
     _.each(trajectory, function(point) { 
-      if (_.contains(cols, point.col) && minRow <= point.row && point.row <= maxRow) {
+      if (_.contains(pillarsArray, point.col) && minRow <= point.row && point.row <= maxRow) {
         collisions.push({
           collided: true, 
           point: point,
@@ -59,7 +59,7 @@ var Column = Class.extend({
     var startColumn = trajectory[0].col;
     var endColumn = trajectory[trajectory.length-1].col;
 
-    return _.any(this.columns, function(loc) {
+    return _.any(this.pillars, function(loc) {
       return loc >= startColumn && loc <= endColumn;
     });
   },

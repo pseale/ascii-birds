@@ -91,9 +91,9 @@
     var viewPort = game.createViewPort();
     var screen = createEmptyScreen();
 
-    drawPillar(screen, viewPort.topColumns, 0, 4);
+    drawPillar(screen, viewPort.topPillars, 0, 4);
 
-    drawPillar(screen, viewPort.bottomColumns, 6, 9);
+    drawPillar(screen, viewPort.bottomPillars, 6, 9);
 
     if (!viewPort.outOfBounds) {
       drawPlayer(screen, viewPort);

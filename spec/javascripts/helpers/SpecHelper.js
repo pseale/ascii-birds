@@ -1,6 +1,6 @@
 "use strict";
 
-var HardcodedColumnGenerator = Class.extend({
+var HardcodedPillarGenerator = Class.extend({
   init: function(array) {
     this.array = array;
   },
@@ -22,13 +22,13 @@ var ObjectMother = {
 
     var game = new GameController();
 
-    var topColumn = new Column();
-    topColumn.columnGenerator = new HardcodedColumnGenerator(topPillarArray);
-    game.topColumn = topColumn;
+    var topPillar = new Pillar();
+    topPillar.pillarGenerator = new HardcodedPillarGenerator(topPillarArray);
+    game.topPillar = topPillar;
 
-    var emptyBottomColumn = new Column();
-    emptyBottomColumn.columnGenerator = new HardcodedColumnGenerator(bottomPillarArray);
-    game.bottomColumn = emptyBottomColumn;
+    var emptyBottomPillar = new Pillar();
+    emptyBottomPillar.pillarGenerator = new HardcodedPillarGenerator(bottomPillarArray);
+    game.bottomPillar = emptyBottomPillar;
 
     return game;
   },

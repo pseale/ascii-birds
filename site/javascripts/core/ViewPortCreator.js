@@ -5,8 +5,8 @@ var ViewPortCreator = Class.extend({
     this.trajectoryCalculator = new TrajectoryCalculator();
   },
 
-  findPillarsInViewPort: function(scrollLocation, column) {
-    return _.map(column.findAllNearby(scrollLocation), function(col) { 
+  findPillarsInViewPort: function(scrollLocation, pillar) {
+    return _.map(pillar.findAllNearby(scrollLocation), function(col) { 
       return col - scrollLocation;
     });
   },
@@ -37,14 +37,14 @@ var ViewPortCreator = Class.extend({
     return pointRowCol(point.row, point.col - scrollLocation);
   },
 
-  create: function(scrollLocation, playerLocation, topColumn, bottomColumn, collided, outOfBounds, gameOver, score) {
-    var topColumns = this.findPillarsInViewPort(scrollLocation, topColumn);
-    var bottomColumns = this.findPillarsInViewPort(scrollLocation, bottomColumn);
+  create: function(scrollLocation, playerLocation, topPillar, bottomPillar, collided, outOfBounds, gameOver, score) {
+    var topPillars = this.findPillarsInViewPort(scrollLocation, topPillar);
+    var bottomPillars = this.findPillarsInViewPort(scrollLocation, bottomPillar);
 
     if (playerLocation === undefined) {
       return {
-        topColumns: topColumns,
-        bottomColumns: bottomColumns,
+        topPillars: topPillars,
+        bottomPillars: bottomPillars,
         collided: collided,
         outOfBounds: outOfBounds,
         gameOver: gameOver,
@@ -57,8 +57,8 @@ var ViewPortCreator = Class.extend({
       trajectory: this.shiftTrajectoriesForViewPort(
         scrollLocation, 
         this.trajectoryCalculator.getTrajectories(playerLocation)),
-      topColumns: topColumns,
-      bottomColumns: bottomColumns,
+      topPillars: topPillars,
+      bottomPillars: bottomPillars,
       collided: collided,
       outOfBounds: outOfBounds,
       gameOver: gameOver,

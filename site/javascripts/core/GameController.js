@@ -2,8 +2,8 @@
 
 var GameController = Class.extend({
   init: function() {
-    this.topColumn = new Column();
-    this.bottomColumn = new Column();
+    this.topPillar = new Pillar();
+    this.bottomPillar = new Pillar();
     this.trajectoryCalculator = new TrajectoryCalculator();
 
     this.playerLocation = pointRowCol(4, 0); //starting point of game
@@ -18,8 +18,8 @@ var GameController = Class.extend({
     return (new ViewPortCreator()).create(
       this.scrollLocation,
       this.playerLocation,
-      this.topColumn,
-      this.bottomColumn,
+      this.topPillar,
+      this.bottomPillar,
       this.collided,
       this.outOfBounds,
       this.gameOver,
@@ -43,7 +43,7 @@ var GameController = Class.extend({
     var trajectory = this.trajectoryCalculator.getTrajectory(this.playerLocation, power);
     var moveCommand = new MoveCommand();
 
-    var result = moveCommand.execute(trajectory, this.topColumn, this.bottomColumn);
+    var result = moveCommand.execute(trajectory, this.topPillar, this.bottomPillar);
 
     this.playerLocation = result.playerLocation;
     this.collided = result.collided;

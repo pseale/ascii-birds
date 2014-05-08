@@ -30,13 +30,13 @@ var MoveCommand = Class.extend({
     };
   },
 
-  execute: function(trajectory, topColumn, bottomColumn) {
-    var topCollision = topColumn.findCollision(trajectory, 0, 4);
+  execute: function(trajectory, topPillar, bottomPillar) {
+    var topCollision = topPillar.findCollision(trajectory, 0, 4);
     if (topCollision.collided) {
       return this.createCollisionResult(topCollision);
     }
 
-    var bottomCollision = bottomColumn.findCollision(trajectory, 6, 9);
+    var bottomCollision = bottomPillar.findCollision(trajectory, 6, 9);
     if (bottomCollision.collided) {
       return this.createCollisionResult(bottomCollision);
     }
@@ -51,10 +51,10 @@ var MoveCommand = Class.extend({
 
     var scoreToAdd = 0;
 
-    if(topColumn.crossedBy(trajectory)) {
+    if(topPillar.crossedBy(trajectory)) {
       scoreToAdd++;
     }
-    if(bottomColumn.crossedBy(trajectory)) {
+    if(bottomPillar.crossedBy(trajectory)) {
       scoreToAdd++;
     }
     

@@ -1,13 +1,13 @@
 "use strict";
 
-describe("Colliding with a column", function() {
-  describe("Colliding with a top column", function() {
+describe("Colliding with a pillar", function() {
+  describe("Colliding with a top pillar", function() {
     var game = {};
     var oldViewPort = {};
     beforeEach(function() {
       game = ObjectMother.createGameWithHardcodedTopPillars([2]);
 
-      oldViewPort = game.createViewPort(); //awful, do this to modify the lazy column data
+      oldViewPort = game.createViewPort(); //awful, do this to modify the lazy pillar data
       game.move(4);
     });
 

@@ -4,13 +4,13 @@ describe("Receiving a move command", function() {
   it("moves the player 2 columns over", function() {
     var game = new GameController();
     var viewPort = game.createViewPort();
-    var firstTopColumn = viewPort.topColumns[0];
+    var firstTopPillar = viewPort.topPillars[0];
 
     game.move(0);
 
     var viewPortAfterMove = game.createViewPort();
-    var firstTopColumnAfterMove = viewPortAfterMove.topColumns[0];
+    var firstTopPillarAfterMove = viewPortAfterMove.topPillars[0];
 
-    expect(firstTopColumnAfterMove).toEqual(firstTopColumn-2);
+    expect(firstTopPillarAfterMove).toEqual(firstTopPillar-2);
   });
 });
