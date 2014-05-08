@@ -3,6 +3,7 @@
 
   var game = new GameController();
   var isInGame = false;
+  var canMove = false;
 
   function formatBorder(screenText) {
     var text = "~~~~~~~~~~~~~~~~~~~~~~\n";
@@ -15,8 +16,7 @@
      return text;
   }
 
-  function drawScreen(game) {
-    var viewPort = game.createViewPort();
+  function drawScreen(viewPort) {
     var text = formatBorder(ScreenFormatter.draw(viewPort));
     
     $('#screen').html(text);
@@ -36,13 +36,14 @@
       return;
     }
     isInGame = true;
+    canMove = true;
     $('#title').hide();
     $('#start-button').hide();
     $('#quit-button').show(); 
     $('#command-bar').show();
     game = new GameController();
 
-    drawScreen(game);
+    drawScreen(game.createViewPort());
     $('#screen').show();
   }
 
@@ -59,11 +60,16 @@
   }
 
   function move(power) {
-    if (!isInGame) {
+    if (!isInGame || !canMove) {
       return;
     }
+
     game.move(power);
-    drawScreen(game);
+    var viewPort = game.createViewPort();
+    drawScreen(viewPort);
+    if (viewPort.gameOver) {
+      canMove = false;
+    }
   }
 
 
