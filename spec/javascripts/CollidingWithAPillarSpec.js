@@ -7,7 +7,7 @@ describe("Colliding with a pillar", function() {
     beforeEach(function() {
       game = ObjectMother.createGameWithHardcodedTopPillars([2]);
 
-      oldViewPort = game.createViewPort(); //awful, do this to modify the lazy pillar data
+      oldViewPort = game.createViewPort();
       game.move(4);
     });
 
