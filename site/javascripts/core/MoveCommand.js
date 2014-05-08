@@ -1,6 +1,6 @@
 "use strict";
 
-var MoveCommand = Class.extend({
+var MoveCommand = {
   createCollisionResult: function(collision) {
     return {
       collided: true,
@@ -60,4 +60,4 @@ var MoveCommand = Class.extend({
     
     return this.createMoveResult(trajectory, scoreToAdd);
   },  
-});
+};

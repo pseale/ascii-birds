@@ -28,8 +28,7 @@ describe("Finding pillars in range", function() {
     expect(pillar.findAllNearby(10)).toContain(10+18);
   });
 
-  it("excludes any pillar
-   in front of the player beyond visible range", function() {
+  it("excludes any pillar in front of the player beyond visible range", function() {
     var pillarsInRange = pillar.findAllNearby(10+19); 
     expect(pillar.findAllNearby(10)).not.toContain(10+19);
   });

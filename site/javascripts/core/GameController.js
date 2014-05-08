@@ -41,9 +41,8 @@ var GameController = Class.extend({
     }
 
     var trajectory = this.trajectoryCalculator.getTrajectory(this.playerLocation, power);
-    var moveCommand = new MoveCommand();
 
-    var result = moveCommand.execute(trajectory, this.topPillar, this.bottomPillar);
+    var result = MoveCommand.execute(trajectory, this.topPillar, this.bottomPillar);
 
     this.playerLocation = result.playerLocation;
     this.collided = result.collided;
