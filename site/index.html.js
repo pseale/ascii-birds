@@ -15,8 +15,19 @@
   }
 
   function drawScreen(game) {
-    var text = formatBorder(ScreenFormatter.draw(game.createViewPort()));
+    var viewPort = game.createViewPort();
+    var text = formatBorder(ScreenFormatter.draw(viewPort));
+    
     $('#screen').html(text);
+
+    if (viewPort.justScored) {
+      $('.scoreboard').css({ color: 'cyan', 'background-color': 'magenta' });
+
+      var changeBackFunc = function() { 
+        $('.scoreboard').css({ color: 'yellow', 'background-color': 'black' });
+      };
+      _.delay(changeBackFunc, 400);
+    }
   }
 
   function startGame() {
