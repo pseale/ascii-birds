@@ -7,7 +7,7 @@ var Pillar = Class.extend({
   },
 
   stillInRange: function(loc) {
-    return _.max(this.pillars) <= this.furthestLocationStillInRange(loc)
+    return this.pillars.length === 0 || _.max(this.pillars) <= this.furthestLocationStillInRange(loc);
   },
 
   furthestLocationStillInRange: function(loc) {

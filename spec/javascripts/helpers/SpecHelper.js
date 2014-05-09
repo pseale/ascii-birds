@@ -6,7 +6,11 @@ var HardcodedPillarGenerator = Class.extend({
   },
 
   next: function() {
-    return this.array.shift();
+    var value = this.array.shift();
+    if (value === undefined)
+      return Infinity;
+
+    return value;
   }
 });
 

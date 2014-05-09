@@ -8,6 +8,7 @@
   var viewingHelp = false;
 
   function formatBorder(screenText) {
+    var border = "~~~~~~~~~~~~~~~~~~~~~~";
     var text = "~~~~~~~~~~~~~~~~~~~~~~\n";
 
     _.each(screenText, function(line) {
@@ -16,6 +17,11 @@
      text += "~~~~~~~~~~~~~~~~~~~~~~\n";
 
      return text;
+     // return _.union(
+     //                [border], 
+     //                _.map(screenText, function(line) { return "~" + line + "~" }), 
+     //                [border])
+     //        .
   }
 
   function drawScreen(viewPort) {
