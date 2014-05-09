@@ -1,7 +1,9 @@
 "use strict";
 
-var MoveCommand = {
-  createCollisionResult: function(collision) {
+var MoveCommand = function() {
+  var my = function() { };
+
+  function createCollisionResult(collision) {
     return {
       collided: true,
       outOfBounds: false,
@@ -9,18 +11,18 @@ var MoveCommand = {
       playerLocation: collision.point,
       scoreToAdd: 0,
     };
-  },
+  }
 
-  outOfBoundsResult: function() {
+  function createOutOfBoundsResult() {
     return {
       collided: false,
       outOfBounds: true,
       gameOver: true,
       scoreToAdd: 0,
     };
-  },
+  }
 
-  createMoveResult: function(trajectory, scoreToAdd) {
+  function createMoveResult(trajectory, scoreToAdd) {
     return {
       collided: false,
       outOfBounds: false,
@@ -28,17 +30,17 @@ var MoveCommand = {
       playerLocation: trajectory[trajectory.length-1],
       scoreToAdd: scoreToAdd,
     };
-  },
+  }
 
-  execute: function(trajectory, topPillar, bottomPillar) {
+  my.execute = function(trajectory, topPillar, bottomPillar) {
     var topCollision = topPillar.findCollision(trajectory, AsciiBirds.topPillarMinRow, AsciiBirds.topPillarMaxRow);
     if (topCollision.collided) {
-      return this.createCollisionResult(topCollision);
+      return createCollisionResult(topCollision);
     }
 
     var bottomCollision = bottomPillar.findCollision(trajectory, AsciiBirds.bottomPillarMinRow, AsciiBirds.bottomPillarMaxRow);
     if (bottomCollision.collided) {
-      return this.createCollisionResult(bottomCollision);
+      return createCollisionResult(bottomCollision);
     }
 
     var areAnyPointsOutOfBounds = _.any(trajectory, function(point) {
@@ -46,7 +48,7 @@ var MoveCommand = {
     });
 
     if (areAnyPointsOutOfBounds) {
-      return this.outOfBoundsResult();
+      return createOutOfBoundsResult();
     }
 
     var scoreToAdd = 0;
@@ -58,6 +60,8 @@ var MoveCommand = {
       scoreToAdd++;
     }
     
-    return this.createMoveResult(trajectory, scoreToAdd);
-  },  
-};
+    return createMoveResult(trajectory, scoreToAdd);
+  };
+
+  return my;
+}();
