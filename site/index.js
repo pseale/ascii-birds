@@ -34,11 +34,12 @@
   }
 
   function startGame() {
-    if (isInGame) {
+    if (isInGame || viewingHelp) {
       return;
     }
     isInGame = true;
     canMove = true;
+
     $('#title-screen').hide();
     $('#game-screen').show(); 
     game = new GameController();
@@ -48,7 +49,7 @@
   }
 
   function quitGame() {
-    if (!isInGame) {
+    if (!isInGame || viewingHelp) {
       return;
     }
     $('#title-screen').show();
@@ -61,6 +62,7 @@
       return;
     }
 
+    highlightSuccessfulAction('#power-' + power + '-move');
     game.move(power);
     var viewPort = game.createViewPort();
     drawScreen(viewPort);
@@ -96,6 +98,13 @@
     }
 
     viewingHelp = false;
+  }
+
+  function highlightSuccessfulAction(selector) {
+    $(selector).css({ color: 'yellow', 'background-color': 'cyan' })
+    _.delay(function() {
+      $(selector).css({ color: '#111', 'background-color': '#FDFDFD' });
+    }, 100);
   }
 
   //bindings
