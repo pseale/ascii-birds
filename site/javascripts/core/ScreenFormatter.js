@@ -35,13 +35,15 @@ var ScreenFormatter = {
   createEmptyScreen: function() {
     var screen = [];
 
-    for (var row=0; row<AsciiBirds.windowHeight; row++) {
-      var rowArray = [];
-      for (var col=0; col<AsciiBirds.windowWidth; col++) {
-        rowArray.push("\u00B7"); //Unicode character is an 'Interpunct': http://en.wikipedia.org/wiki/Interpunct
-      }
-      screen.push(rowArray);
-    }
+    _(_.range(0, AsciiBirds.windowHeight)).each(function(row) {
+
+      screen.push(
+        _(_.range(0, AsciiBirds.windowWidth)).map(function(col) {
+          return "\u00B7"; //Unicode character is an 'Interpunct': http://en.wikipedia.org/wiki/Interpunct
+        })
+        .value());
+
+    });
 
     return screen;
   },
@@ -49,9 +51,9 @@ var ScreenFormatter = {
   drawPillar: function(screen, pillarArray, minRow, maxRow) {
     var pillarsInView = _.filter(pillarArray, function(pillar) { return pillar < AsciiBirds.windowWidth });
     _.each(pillarsInView, function (pillar) {
-      for(var row=minRow; row<=maxRow; row++) {
+      _.each(_.range(minRow, maxRow+1), function(row) {
         screen[row][pillar] = "#";
-      }
+      });
     });
   },
 
