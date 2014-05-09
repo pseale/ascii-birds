@@ -34,15 +34,16 @@ Goals
 * Solve a fun problem
 * Try out jasmine specs
 * Experiment with organizing JavaScript code
-
+* Try out lo-dash
 
 Things I could and probably should improve, but won't
 -----------------------------------------------------
 
 * UI:
-  * I use a lot of "id" tags in the HTML instead of "class"es. Mostly. In "real" apps I'd favor using classes over ids as things were much more likely to be reused.
-  * I sacrificed some usability (tab-friendliness and consistency on link/button clicking) to make my artisanal ASCII buttons.
-  * There is a lot of duplication in the HTML that I could eliminate if I used either server-side templates, or even client-side JavaScript templates. I didn't do either, just know that I could, and know that I know you know.
+  * I use a lot of "id" tags in the HTML instead of "class"es. Mostly. In real apps I favor using classes over ids as content is more likely to be reused.
+  * I sacrificed some usability--specifically, tab-friendliness and consistency on link/button clicking--to make my artisanal ASCII buttons.
+  * There is a lot of duplication in the HTML that I could eliminate if I used either server-side templates, or even client-side JavaScript templates. I didn't do either, just know that I could, and know that I know you know I could.
+  * I use boolean flags to enable/disable features (e.g. you can't use the move command unless you're in-game), and I am aware I can improve this. If it gets any more complicated than it already is (3 flags currently), I'll make a state machine.
 
 * Jasmine specs:
   * I have real problems with getting Jasmine to do what I want to do, how I want to do it. Specifically, I feel like I should never be using beforeEach() blocks; instead I want to  replace any beforeEach() calls with a call to some kind of context() method that is called once per describe block. With this in mind, I half gave up cleaning up my Jasmine specs until I figure out how to write them in my style.
