@@ -69,24 +69,17 @@ var ScreenFormatter = {
   },
 
   drawTrajectories: function(screen, trajectories) {
-    for (var i=0; i<trajectories.length; i++) {
+    _(_.range(0, trajectories.length)).each(function(i) {
       _.each(trajectories[i], function(point) {
         screen[point.row][point.col] = "<span class='trajectory-" + i + "'>" + screen[point.row][point.col] + "</span>";
       });
-    }
+    });
   },
 
   convertScreenArrayToText: function(screen) {
-    var screenText = [];
-    _.each(screen, function(row) {
-      var rowText = "";
-      for (var i=0;i<row.length; i++) {
-        rowText += row[i];
-      }
-      screenText.push(rowText);
+    return _.map(screen, function(row) {
+      return row.join('');
     });
-
-    return screenText;
   },
 
   drawScore: function(screenText, score) {
