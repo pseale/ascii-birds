@@ -1,7 +1,7 @@
 <html>
 <head>
   <title>ASCII Birds</title>
-  <link rel="stylesheet" href="reset.css" />
+  <link rel="stylesheet" href="/reset.css" />
   <style>
     .button {
       clear: left;
@@ -16,13 +16,13 @@
       font-size: 8px;
     }
 
-    pre#screen, div#quit-button, #command-bar {
+    #game-screen, #help-screen {
       display: none;
     }
 
     .small-button {
       float: left;
-      margin: 3px;
+      margin: 4px;
       cursor: pointer;
     }
 
@@ -52,9 +52,19 @@
       color: blue;
       text-decoration: underline;
     }
+
+    .help-bar {
+    }
+
+    #help-container {
+      width: 700px;
+    }
   </style>
 </head>
 <body>
+
+
+<div id="title-screen">
 <pre id="title">                                                                                                                                                                                          
                                                                                                                                                                                           
                AAA                 SSSSSSSSSSSSSSS         CCCCCCCCCCCCCIIIIIIIIIIIIIIIIIII     BBBBBBBBBBBBBBBBB   IIIIIIIIIIRRRRRRRRRRRRRRRRR   DDDDDDDDDDDDD           SSSSSSSSSSSSSSS 
@@ -81,6 +91,17 @@ AAAAAAA                   AAAAAAASSSSSSSSSSSSSSS           CCCCCCCCCCCCCIIIIIIII
                                                                                                                                                                                           
                                                                                                                                                                                           
 </pre>
+
+<div id="start-button" class="button">
+  <pre>xxxxxxxxxxx
+x  <span class='looks-like-hyperlink'>START</span>  x
+xxxxxxxxxxx</pre>
+</div>
+
+</div>
+
+
+<div id="game-screen">
 <pre id="screen">
 ~~~~~~~~~~~~~~~~~~~~~~
 ~....................~
@@ -123,18 +144,35 @@ x<span class='looks-like-hyperlink'>4</span>x
 xxx</pre></div>
 
 </div>
-<div id="start-button" class="button">
-  <pre>xxxxxxxxxxx
-x  <span class='looks-like-hyperlink'>START</span>  x
-xxxxxxxxxxx</pre>
-</div>
-<br />
 <div id="quit-button" class="button">
   <pre>xxxxxxxxxxx
 x  <span class='looks-like-hyperlink'>QUIT</span>   x
 xxxxxxxxxxx</pre>
 </div>
+</div>
+
+<div class='help-bar'>
+  <br />
+  <a id="help-link" href="/help/">(?) HOW TO PLAY</a>
+</div>
+
 <div id="error-report"></div>
+
+<div id="help-screen">
+  <div style="display: inline-block;">
+    <div style="width: 100%; text-align: center;">
+      <div id="help-content">
+      </div>
+      <div id="close-button" class="button">
+
+<pre>xxxxxxxxxxx
+x  <span class='looks-like-hyperlink'>CLOSE</span>  x
+xxxxxxxxxxx</pre>
+
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="javascripts/lib/jquery.min.js"></script>
 <script src="javascripts/lib/mousetrap.min.js"></script>

@@ -1,9 +1,11 @@
+"use strict";
+
 (function () {
-  "use strict";
 
   var game = new GameController();
   var isInGame = false;
   var canMove = false;
+  var viewingHelp = false;
 
   function formatBorder(screenText) {
     var text = "~~~~~~~~~~~~~~~~~~~~~~\n";
@@ -37,10 +39,8 @@
     }
     isInGame = true;
     canMove = true;
-    $('#title').hide();
-    $('#start-button').hide();
-    $('#quit-button').show(); 
-    $('#command-bar').show();
+    $('#title-screen').hide();
+    $('#game-screen').show(); 
     game = new GameController();
 
     drawScreen(game.createViewPort());
@@ -51,11 +51,8 @@
     if (!isInGame) {
       return;
     }
-    $('#title').show();
-    $('#start-button').show();
-    $('#quit-button').hide(); 
-    $('#command-bar').hide();
-    $('#screen').hide();
+    $('#title-screen').show();
+    $('#game-screen').hide(); 
     isInGame = false;
   }
 
@@ -72,6 +69,34 @@
     }
   }
 
+  function viewHelp() {
+    if (viewingHelp) {
+      return;
+    }
+    viewingHelp = true;
+    $('#title-screen').hide();
+    $('#game-screen').hide();
+    $('.help-bar').hide();
+    $('#help-content').load("/help/");
+    $('#help-screen').show();
+  }
+
+  function closeHelp() {
+    if (!viewingHelp) {
+      return;
+    }
+
+    $('#help-screen').hide();
+    $('.help-bar').show();
+
+    if (isInGame) {
+      $('#game-screen').show();
+    } else {
+      $('#title-screen').show();
+    }
+
+    viewingHelp = false;
+  }
 
   //bindings
   window.onerror = function(msg, url, line) {
@@ -124,5 +149,18 @@
     wireUpButton(2, ['2']);
     wireUpButton(3, ['3']);
     wireUpButton(4, ['4']);
+
+    $('#help-link').click(function() {
+      viewHelp();
+      return false;
+    });
+
+    $('#close-button').click(function() {
+      closeHelp();
+      return false;
+    });
+    Mousetrap.bind('/', viewHelp);
+    Mousetrap.bind('?', viewHelp);
+    Mousetrap.bind('esc', closeHelp);
   });
 })();
