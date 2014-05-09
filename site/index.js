@@ -1,9 +1,11 @@
+"use strict";
+
 (function () {
-  "use strict";
 
   var game = new GameController();
   var isInGame = false;
   var canMove = false;
+  var viewingHelp = false;
 
   function formatBorder(screenText) {
     var text = "~~~~~~~~~~~~~~~~~~~~~~\n";
@@ -32,15 +34,16 @@
   }
 
   function startGame() {
-    if (isInGame) {
+    if ((isInGame && canMove) || viewingHelp) {
       return;
     }
     isInGame = true;
     canMove = true;
-    $('#title').hide();
-    $('#start-button').hide();
-    $('#quit-button').show(); 
-    $('#command-bar').show();
+
+    highlightSuccessfulAction('#start-button');
+
+    $('#title-screen').hide();
+    $('#game-screen').show(); 
     game = new GameController();
 
     drawScreen(game.createViewPort());
@@ -48,14 +51,14 @@
   }
 
   function quitGame() {
-    if (!isInGame) {
+    if (!isInGame || viewingHelp) {
       return;
     }
-    $('#title').show();
-    $('#start-button').show();
-    $('#quit-button').hide(); 
-    $('#command-bar').hide();
-    $('#screen').hide();
+
+
+    highlightSuccessfulAction('#quit-button');
+    $('#title-screen').show();
+    $('#game-screen').hide(); 
     isInGame = false;
   }
 
@@ -64,6 +67,7 @@
       return;
     }
 
+    highlightSuccessfulAction('#power-' + power + '-move');
     game.move(power);
     var viewPort = game.createViewPort();
     drawScreen(viewPort);
@@ -72,6 +76,45 @@
     }
   }
 
+  function viewHelp() {
+    if (viewingHelp) {
+      return;
+    }
+    viewingHelp = true;
+
+
+    highlightSuccessfulAction('#help-link');
+    $('#title-screen').hide();
+    $('#game-screen').hide();
+    $('.help-bar').hide();
+    $('#help-content').load("help/");
+    $('#help-screen').show();
+  }
+
+  function closeHelp() {
+    if (!viewingHelp) {
+      return;
+    }
+
+    highlightSuccessfulAction('#close-button');
+    $('#help-screen').hide();
+    $('.help-bar').show();
+
+    if (isInGame) {
+      $('#game-screen').show();
+    } else {
+      $('#title-screen').show();
+    }
+
+    viewingHelp = false;
+  }
+
+  function highlightSuccessfulAction(selector) {
+    $(selector).addClass('active-button');
+    _.delay(function() {
+      $(selector).removeClass('active-button');
+    }, 100);
+  }
 
   //bindings
   window.onerror = function(msg, url, line) {
@@ -124,5 +167,18 @@
     wireUpButton(2, ['2']);
     wireUpButton(3, ['3']);
     wireUpButton(4, ['4']);
+
+    $('#help-link').click(function() {
+      viewHelp();
+      return false;
+    });
+
+    $('#close-button').click(function() {
+      closeHelp();
+      return false;
+    });
+    Mousetrap.bind('/', viewHelp);
+    Mousetrap.bind('?', viewHelp);
+    Mousetrap.bind('esc', closeHelp);
   });
 })();
