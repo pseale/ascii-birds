@@ -4,9 +4,8 @@ var GameController = Class.extend({
   init: function() {
     this.topPillar = new Pillar();
     this.bottomPillar = new Pillar();
-    this.trajectoryCalculator = new TrajectoryCalculator();
 
-    this.playerLocation = pointRowCol(4, 0); //starting point of game
+    this.playerLocation = pointRowCol(AsciiBirds.playerStartRow, AsciiBirds.playerStartCol);
     this.collided = false;
     this.outOfBounds = false;
     this.gameOver = false;
@@ -16,7 +15,7 @@ var GameController = Class.extend({
   },
 
   createViewPort: function() {
-    return (new ViewPortCreator()).create(
+    return ViewPortCreator.create(
       this.scrollLocation,
       this.playerLocation,
       this.topPillar,
@@ -42,7 +41,7 @@ var GameController = Class.extend({
       throw new Error("Game over, cannot perform any action.");
     }
 
-    var trajectory = this.trajectoryCalculator.getTrajectory(this.playerLocation, power);
+    var trajectory = TrajectoryCalculator.getTrajectory(this.playerLocation, power);
 
     var result = MoveCommand.execute(trajectory, this.topPillar, this.bottomPillar);
 

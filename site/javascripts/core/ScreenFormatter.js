@@ -4,35 +4,37 @@
 
 "use strict";
 
-var ScreenFormatter = {
-  draw: function(viewPort) {
-    var screen = this.createEmptyScreen();
+var ScreenFormatter = function() {
+  var my = function() { };
 
-    this.drawPillar(screen, viewPort.topPillars, AsciiBirds.topPillarMinRow, AsciiBirds.topPillarMaxRow);
+  my.draw = function(viewPort) {
+    var screen = createEmptyScreen();
 
-    this.drawPillar(screen, viewPort.bottomPillars, AsciiBirds.bottomPillarMinRow, AsciiBirds.bottomPillarMaxRow);
+    drawPillar(screen, viewPort.topPillars, AsciiBirds.topPillarMinRow, AsciiBirds.topPillarMaxRow);
+
+    drawPillar(screen, viewPort.bottomPillars, AsciiBirds.bottomPillarMinRow, AsciiBirds.bottomPillarMaxRow);
 
     if (!viewPort.outOfBounds) {
-      this.drawPlayer(screen, viewPort);
+      drawPlayer(screen, viewPort);
 
       if (!viewPort.gameOver) {
-        this.drawTrajectories(screen, viewPort.trajectory);
+        drawTrajectories(screen, viewPort.trajectory);
       }
     }
 
-    var screenText = this.convertScreenArrayToText(screen);
+    var screenText = convertScreenArrayToText(screen);
 
     //draw "overlays" or "windows" over the rest of the screen
-    this.drawScore(screenText, viewPort.score);
+    drawScore(screenText, viewPort.score);
     if (viewPort.gameOver) {
       screenText[5] = "<span class='game-over-alert'> ::: GAME  OVER ::: </span>"
     }
 
     return screenText;
-  },
+  };
 
 
-  createEmptyScreen: function() {
+  function createEmptyScreen() {
     var screen = [];
 
     for (var row=0; row<AsciiBirds.windowHeight; row++) {
@@ -44,18 +46,18 @@ var ScreenFormatter = {
     }
 
     return screen;
-  },
+  }
 
-  drawPillar: function(screen, pillarArray, minRow, maxRow) {
+  function drawPillar(screen, pillarArray, minRow, maxRow) {
     var pillarsInView = _.filter(pillarArray, function(pillar) { return pillar < AsciiBirds.windowWidth });
     _.each(pillarsInView, function (pillar) {
       for(var row=minRow; row<=maxRow; row++) {
         screen[row][pillar] = "#";
       }
     });
-  },
+  }
 
-  drawPlayer: function(screen, viewPort) {
+  function drawPlayer(screen, viewPort) {
     var token = "";
     if (viewPort.collided) {
       token = "<span class='collision'>%</span>";
@@ -64,17 +66,17 @@ var ScreenFormatter = {
     }
 
     screen[viewPort.playerLocation.row][viewPort.playerLocation.col] = token;
-  },
+  }
 
-  drawTrajectories: function(screen, trajectories) {
+  function drawTrajectories(screen, trajectories) {
     for (var i=0; i<trajectories.length; i++) {
       _.each(trajectories[i], function(point) {
         screen[point.row][point.col] = "<span class='trajectory-" + i + "'>" + screen[point.row][point.col] + "</span>";
       });
     }
-  },
+  }
 
-  convertScreenArrayToText: function(screen) {
+  function convertScreenArrayToText(screen) {
     var screenText = [];
     _.each(screen, function(row) {
       var rowText = "";
@@ -85,9 +87,9 @@ var ScreenFormatter = {
     });
 
     return screenText;
-  },
+  }
 
-  drawScore: function(screenText, score) {
+  function drawScore(screenText, score) {
     if (score > 999) {
       score = 999;
     }
@@ -103,5 +105,7 @@ var ScreenFormatter = {
     }
 
     screenText[0] = screenText[0].substring(0, screenText[0].length-width) + "<span class='scoreboard'>" + scoreString + "</span>";
-  },
-};
+  }
+
+  return my;
+}();

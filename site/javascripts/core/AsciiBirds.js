@@ -3,6 +3,9 @@
 var AsciiBirds = {
   moveSpeed: 2,
 
+  playerStartRow: 4,
+  playerStartCol: 0,
+
   topPillarMinRow: 0,
   topPillarMaxRow: 4,
 

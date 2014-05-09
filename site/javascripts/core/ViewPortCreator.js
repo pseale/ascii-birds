@@ -1,17 +1,15 @@
 "use strict";
 
-var ViewPortCreator = Class.extend({
-  init: function() {
-    this.trajectoryCalculator = new TrajectoryCalculator();
-  },
+var ViewPortCreator = function() {
+  var my = function() { };
 
-  findPillarsInViewPort: function(scrollLocation, pillar) {
+  my.findPillarsInViewPort = function(scrollLocation, pillar) {
     return _.map(pillar.findAllNearby(scrollLocation), function(col) { 
       return col - scrollLocation;
     });
-  },
+  };
 
-  shiftTrajectoriesForViewPort: function(scrollLocation, trajectories) {
+  function shiftTrajectoriesForViewPort(scrollLocation, trajectories) {
     //refactor out these awful temp arrays when I switch out from underscore to lo-dash
     var newTrajectories = [];
     for (var i=0; i<trajectories.length; i++) {
@@ -21,26 +19,26 @@ var ViewPortCreator = Class.extend({
       });
 
       for (var j=0; j<legalPoints.length; j++) {
-        newTrajectory.push(this.shiftLocationForViewPort(scrollLocation, legalPoints[j]));
+        newTrajectory.push(shiftLocationForViewPort(scrollLocation, legalPoints[j]));
       }
 
       newTrajectories.push(newTrajectory);
     }
 
     return newTrajectories;
-  },
+  }
 
-  shiftLocationForViewPort: function(scrollLocation, point) {
+  function shiftLocationForViewPort(scrollLocation, point) {
     if (point === undefined) {
       return undefined;
     }
     return pointRowCol(point.row, point.col - scrollLocation);
-  },
+  }
 
-  create: function(scrollLocation, playerLocation, topPillar, bottomPillar, collided, outOfBounds, gameOver, score, justScored) {
+  my.create = function(scrollLocation, playerLocation, topPillar, bottomPillar, collided, outOfBounds, gameOver, score, justScored) {
     var result = {
-      topPillars: this.findPillarsInViewPort(scrollLocation, topPillar),
-      bottomPillars: this.findPillarsInViewPort(scrollLocation, bottomPillar),
+      topPillars: my.findPillarsInViewPort(scrollLocation, topPillar),
+      bottomPillars: my.findPillarsInViewPort(scrollLocation, bottomPillar),
       collided: collided,
       outOfBounds: outOfBounds,
       gameOver: gameOver,
@@ -53,10 +51,12 @@ var ViewPortCreator = Class.extend({
     };
 
     return _.extend(result, {
-      playerLocation: this.shiftLocationForViewPort(scrollLocation, playerLocation),
-      trajectory: this.shiftTrajectoriesForViewPort(
+      playerLocation: shiftLocationForViewPort(scrollLocation, playerLocation),
+      trajectory: shiftTrajectoriesForViewPort(
         scrollLocation, 
-        this.trajectoryCalculator.getTrajectories(playerLocation)),
+        TrajectoryCalculator.getTrajectories(playerLocation)),
     });
-  },
-});
+  };
+
+  return my;
+}();
