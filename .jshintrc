@@ -1,0 +1,17 @@
+{
+  "globals": {
+    "$": false,
+    "_": false,
+    "Class": false,
+    "Mousetrap": false,
+    "AsciiBirds": false,
+    "GameController": false,
+    "MoveCommand": false,
+    "Pillar": false,
+    "PillarGenerator": false,
+    "pointRowCol": false,
+    "ScreenFormatter": false,
+    "TrajectoryCalculator": false,
+    "ViewPortCreator": false
+  }
+}

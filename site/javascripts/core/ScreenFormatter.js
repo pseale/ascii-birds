@@ -25,7 +25,7 @@ var ScreenFormatter = {
     //draw "overlays" or "windows" over the rest of the screen
     this.drawScore(screenText, viewPort.score);
     if (viewPort.gameOver) {
-      screenText[5] = "<span class='game-over-alert'> ::: GAME  OVER ::: </span>"
+      screenText[5] = "<span class='game-over-alert'> ::: GAME  OVER ::: </span>";
     }
 
     return screenText;
@@ -49,7 +49,7 @@ var ScreenFormatter = {
   },
 
   drawPillar: function(screen, pillarArray, minRow, maxRow) {
-    var pillarsInView = _.filter(pillarArray, function(pillar) { return pillar < AsciiBirds.windowWidth });
+    var pillarsInView = _.filter(pillarArray, function(pillar) { return pillar < AsciiBirds.windowWidth; });
     _.each(pillarsInView, function (pillar) {
       _.each(_.range(minRow, maxRow+1), function(row) {
         screen[row][pillar] = "#";
