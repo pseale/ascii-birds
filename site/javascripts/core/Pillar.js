@@ -7,7 +7,7 @@ var Pillar = Class.extend({
   },
 
   stillInRange: function(loc) {
-    return this.pillars.length === 0 || _.max(this.pillars) <= this.furthestLocationStillInRange(loc);
+    return !_.any(this.pillars) || _.max(this.pillars) <= this.furthestLocationStillInRange(loc);
   },
 
   furthestLocationStillInRange: function(loc) {
@@ -37,19 +37,20 @@ var Pillar = Class.extend({
     this.generateNearbyPillars(trajectory[0].col);
     
     var pillarsArray = this.pillars;
-    var collisions = [];
 
-    _.each(trajectory, function(point) { 
-      if (_.contains(pillarsArray, point.col) && minRow <= point.row && point.row <= maxRow) {
-        collisions.push({
+    var collisions = _(trajectory).where(function(point) { 
+      return _.contains(pillarsArray, point.col) && minRow <= point.row && point.row <= maxRow; 
+    })
+      .map(function(point) {
+        return {
           collided: true, 
           point: point,
-        });
-      }
-    });
+        }; 
+      })
+      .value();
 
-    if (collisions.length > 0) {
-      return collisions[0];
+    if (_.any(collisions)) {
+      return _.first(collisions);
     }
 
     return { collided: false, };

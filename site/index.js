@@ -9,19 +9,11 @@
 
   function formatBorder(screenText) {
     var border = "~~~~~~~~~~~~~~~~~~~~~~";
-    var text = "~~~~~~~~~~~~~~~~~~~~~~\n";
 
-    _.each(screenText, function(line) {
-      text += "~" + line + "~\n";
-    });
-     text += "~~~~~~~~~~~~~~~~~~~~~~\n";
-
-     return text;
-     // return _.union(
-     //                [border], 
-     //                _.map(screenText, function(line) { return "~" + line + "~" }), 
-     //                [border])
-     //        .
+    return [border].concat(
+             _(screenText).map(function(line) { return "~" + line + "~" }).value())
+             .concat([border])
+           .join("\n");
   }
 
   function drawScreen(viewPort) {
