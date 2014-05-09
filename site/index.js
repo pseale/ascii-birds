@@ -34,11 +34,13 @@
   }
 
   function startGame() {
-    if (isInGame || viewingHelp) {
+    if ((isInGame && canMove) || viewingHelp) {
       return;
     }
     isInGame = true;
     canMove = true;
+
+    highlightSuccessfulAction('#start-button');
 
     $('#title-screen').hide();
     $('#game-screen').show(); 
@@ -52,6 +54,9 @@
     if (!isInGame || viewingHelp) {
       return;
     }
+
+
+    highlightSuccessfulAction('#quit-button');
     $('#title-screen').show();
     $('#game-screen').hide(); 
     isInGame = false;
@@ -76,6 +81,9 @@
       return;
     }
     viewingHelp = true;
+
+
+    highlightSuccessfulAction('#help-link');
     $('#title-screen').hide();
     $('#game-screen').hide();
     $('.help-bar').hide();
@@ -88,6 +96,7 @@
       return;
     }
 
+    highlightSuccessfulAction('#close-button');
     $('#help-screen').hide();
     $('.help-bar').show();
 
@@ -101,9 +110,9 @@
   }
 
   function highlightSuccessfulAction(selector) {
-    $(selector).css({ color: 'yellow', 'background-color': 'cyan' })
+    $(selector).addClass('active-button');
     _.delay(function() {
-      $(selector).css({ color: '#111', 'background-color': '#FDFDFD' });
+      $(selector).removeClass('active-button');
     }, 100);
   }
 

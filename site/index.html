@@ -6,10 +6,20 @@
     .button {
       clear: left;
       cursor: pointer;
+      display: inline-block;
     }
 
-    body {
-      margin: 15px;
+    .small-button {
+      cursor: pointer;
+    }
+
+    .button:hover, .small-button:hover {
+      background-color: yellow;
+    }
+
+    .active-button {
+      color: yellow;
+      background-color: cyan;
     }
 
     #title {
@@ -20,36 +30,26 @@
       display: none;
     }
 
-    .small-button {
-      float: left;
-      margin: 4px;
-      cursor: pointer;
-    }
-
-    .small-button:hover {
-      background-color: yellow;
-    }
-
     .trajectory {
-      background-color: #00FFFF;
+      background-color: cyan;
     }
 
     .collision {
-      background-color: #FF0000;
+      background-color: red;
     }
 
     .game-over-alert {
       color: red;
-      background-color: #000000;
+      background-color: black;
     }
 
     #error-report {
-      color: #FF0000;
+      color: red;
     }
 
     .scoreboard {
-      color: #FFFF00;
-      background-color: #000000;
+      color: yellow;
+      background-color: black;
     }
 
     .looks-like-hyperlink {
@@ -58,10 +58,6 @@
     }
 
     .help-bar {
-    }
-
-    #help-container {
-      width: 700px;
     }
   </style>
 </head>
@@ -96,71 +92,80 @@ AAAAAAA                   AAAAAAASSSSSSSSSSSSSSS           CCCCCCCCCCCCCIIIIIIII
                                                                                                                                                                                           
 </pre>
 
-<div id="start-button" class="button">
-  <pre>xxxxxxxxxxx
-x  <span class='looks-like-hyperlink'>START</span>  x
-xxxxxxxxxxx</pre>
-</div>
-
+  <div id="start-button" class="button">
+    xxxxxxxxxxx<br />
+    x&nbsp;&nbsp;<span class='looks-like-hyperlink'>START</span>&nbsp;&nbsp;x<br />
+    xxxxxxxxxxx
+  </div>
 </div>
 
 
 <div id="game-screen">
-<pre id="screen">
-~~~~~~~~~~~~~~~~~~~~~~
-~....................~
-~....................~
-~....................~
-~....................~
-~....................~
-~....................~
-~....................~
-~....................~
-~....................~
-~....................~
-~~~~~~~~~~~~~~~~~~~~~~
-</pre>
-<div id="command-bar">
+  <pre id="screen"></pre>
 
-<div class="small-button" id="power-0-move">
-<pre>xxx
-x<span class='looks-like-hyperlink'>0</span>x
-xxx</pre></div>
-
-<div class="small-button"  id="power-1-move">
-<pre>xxx
-x<span class='looks-like-hyperlink'>1</span>x
-xxx</pre></div>
-
-<div class="small-button"  id="power-2-move">
-<pre>xxx
-x<span class='looks-like-hyperlink'>2</span>x
-xxx</pre></div>
-
-<div class="small-button"  id="power-3-move">
-<pre>xxx
-x<span class='looks-like-hyperlink'>3</span>x
-xxx</pre></div>
-
-<div class="small-button"  id="power-4-move">
-<pre>xxx
-x<span class='looks-like-hyperlink'>4</span>x
-xxx</pre></div>
+  <div id="command-bar">
+    <table>
+      <tr>
+        <td>
+          <div class="small-button" id="power-0-move">
+            xxx<br />
+            x<span class='looks-like-hyperlink'>0</span>x<br />
+            xxx
+          </div>
+        </td>
+        <td>&nbsp;</td>
+        <td>
+          <div class="small-button"  id="power-1-move">
+            xxx<br />
+            x<span class='looks-like-hyperlink'>1</span>x<br />
+            xxx
+          </div>
+        </td>
+        <td>&nbsp;</td>
+        <td>
+          <div class="small-button"  id="power-2-move">
+            xxx<br />
+            x<span class='looks-like-hyperlink'>2</span>x<br />
+            xxx
+          </div>
+        </td>
+        <td>&nbsp;</td>
+        <td>
+          <div class="small-button"  id="power-3-move">
+            xxx<br />
+            x<span class='looks-like-hyperlink'>3</span>x<br />
+            xxx
+          </div>
+        </td>
+        <td>&nbsp;</td>
+        <td>
+          <div class="small-button"  id="power-4-move">
+            xxx<br />
+            x<span class='looks-like-hyperlink'>4</span>x<br />
+            xxx
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <br />
+  <div id="quit-button" class="button">
+    xxxxxxxxxxx<br />
+    x&nbsp;&nbsp;<span class='looks-like-hyperlink'>QUIT</span>&nbsp;&nbsp;&nbsp;x<br />
+    xxxxxxxxxxx
+  </div>
 
 </div>
-<div id="quit-button" class="button">
-  <pre>xxxxxxxxxxx
-x  <span class='looks-like-hyperlink'>QUIT</span>   x
-xxxxxxxxxxx</pre>
-</div>
-</div>
+
 
 <div class='help-bar'>
   <br />
   <a id="help-link" href="/help/">(?) HOW TO PLAY</a>
 </div>
 
+
 <div id="error-report"></div>
+
 
 <div id="help-screen">
   <div style="display: inline-block;">
@@ -168,11 +173,9 @@ xxxxxxxxxxx</pre>
       <div id="help-content">
       </div>
       <div id="close-button" class="button">
-
-<pre>xxxxxxxxxxx
-x  <span class='looks-like-hyperlink'>CLOSE</span>  x
-xxxxxxxxxxx</pre>
-
+        xxxxxxxxxxx<br />
+        x&nbsp;&nbsp;<span class='looks-like-hyperlink'>CLOSE</span>&nbsp;&nbsp;x<br />
+        xxxxxxxxxxx
       </div>
     </div>
   </div>
