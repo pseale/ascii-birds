@@ -87,7 +87,7 @@
     $('#title-screen').hide();
     $('#game-screen').hide();
     $('.help-bar').hide();
-    $('#help-content').load("/help/");
+    $('#help-content').load("help/");
     $('#help-screen').show();
   }
 
