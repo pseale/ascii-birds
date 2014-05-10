@@ -14,7 +14,7 @@ This is a static HTML/CSS/JavaScript site I created to solve Daily Programmer #1
     * launch `site/index.html` in your browser. (If ASCII Birds is launched from the filesystem, the "(?) HOW TO PLAY" link will not function. You can still view the help page manually.)
     * Using the Sinatra app:
       * `bundle`
-      * `bundle exec ruby sinatra_app.rb` 
+      * `bundle exec rackup` 
 * To run Jasmine specs,
   * launch `spec/javascripts/SpecRunner.html` in your browser.
 * To run jshint,
