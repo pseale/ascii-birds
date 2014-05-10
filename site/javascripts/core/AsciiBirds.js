@@ -6,11 +6,6 @@ var AsciiBirds = {
   playerStartRow: 4,
   playerStartCol: 0,
 
-  topPillarMinRow: 0,
-  topPillarMaxRow: 4,
-
-  bottomPillarMinRow: 6,
-  bottomPillarMaxRow: 9,
 
   windowWidth: 20,
   windowHeight: 10,
@@ -18,6 +13,9 @@ var AsciiBirds = {
 
   pillarDistanceMin: 7,
   pillarDistanceMax: 10,
+
+  pillarHeightMin: 2,
+  pillarHeightMax: 4,
 
   TrajectoryVectors: {
     power0: [

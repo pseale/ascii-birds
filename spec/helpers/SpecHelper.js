@@ -5,12 +5,21 @@ var HardcodedPillarGenerator = Class.extend({
     this.array = array;
   },
 
-  next: function() {
+  next: function(isTopRow) {
     var value = this.array.shift();
-    if (value === undefined)
-      return Infinity;
+    if (value === undefined) {
+      return {
+        offset: Infinity,
+        lowestRow: 0,
+        highestRow: 3,
+      };
+    }
 
-    return value;
+    return {
+      offset: value,
+      lowestRow: 0,
+      highestRow: 3,
+    };
   }
 });
 

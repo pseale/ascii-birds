@@ -11,6 +11,6 @@ describe("Receiving a move command", function() {
     var viewPortAfterMove = game.createViewPort();
     var firstTopPillarAfterMove = viewPortAfterMove.topPillars[0];
 
-    expect(firstTopPillarAfterMove).toEqual(firstTopPillar-2);
+    expect(firstTopPillarAfterMove.offset).toEqual(firstTopPillar.offset-2);
   });
 });

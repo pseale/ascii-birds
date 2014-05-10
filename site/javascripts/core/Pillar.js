@@ -1,13 +1,14 @@
 "use strict";
 
 var Pillar = Class.extend({
-  init: function() {
+  init: function(isTopPillar) {
     this.pillarGenerator = new PillarGenerator();
     this.pillars = [];
+    this.isTopPillar = isTopPillar;
   },
 
   stillInRange: function(loc) {
-    return !_.any(this.pillars) || _.max(this.pillars) <= this.furthestLocationStillInRange(loc);
+    return !_.any(this.pillars) || _(this.pillars).map(function(p) { return p.offset; }).max() <= this.furthestLocationStillInRange(loc);
   },
 
   furthestLocationStillInRange: function(loc) {
@@ -15,7 +16,7 @@ var Pillar = Class.extend({
   },
 
   generateAPillar: function() {
-    this.pillars.push(this.pillarGenerator.next());
+    this.pillars.push(this.pillarGenerator.next(this.isTopPillar));
   },
 
   generateNearbyPillars: function(loc) {
@@ -29,17 +30,19 @@ var Pillar = Class.extend({
 
     var furthest = this.furthestLocationStillInRange(loc);
     return _.filter(this.pillars, function(pillar) {
-      return pillar > loc - AsciiBirds.playerLocationInWindow && furthest >= pillar; 
+      return pillar.offset > loc - AsciiBirds.playerLocationInWindow && furthest >= pillar.offset; 
     });
   },
 
-  findCollision: function(trajectory, minRow, maxRow) {
+  findCollision: function(trajectory) {
     this.generateNearbyPillars(trajectory[0].col);
     
     var pillarsArray = this.pillars;
 
     var collisions = _(trajectory).where(function(point) { 
-      return _.contains(pillarsArray, point.col) && minRow <= point.row && point.row <= maxRow; 
+      return _(pillarsArray).any(function (p) {
+        return point.col === p.offset && point.row >= p.lowestRow && point.row <= p.highestRow;
+      });
     })
       .map(function(point) {
         return {
@@ -60,7 +63,7 @@ var Pillar = Class.extend({
     var startColumn = trajectory[0].col;
     var endColumn = trajectory[trajectory.length-1].col;
 
-    return _.any(this.pillars, function(loc) {
+    return _(this.pillars).map(function(p) { return p.offset; }).any(function(loc) {
       return loc >= startColumn && loc <= endColumn;
     });
   },

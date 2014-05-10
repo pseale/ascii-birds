@@ -33,12 +33,12 @@ var MoveCommand = function() {
   }
 
   my.execute = function(trajectory, topPillar, bottomPillar) {
-    var topCollision = topPillar.findCollision(trajectory, AsciiBirds.topPillarMinRow, AsciiBirds.topPillarMaxRow);
+    var topCollision = topPillar.findCollision(trajectory);
     if (topCollision.collided) {
       return createCollisionResult(topCollision);
     }
 
-    var bottomCollision = bottomPillar.findCollision(trajectory, AsciiBirds.bottomPillarMinRow, AsciiBirds.bottomPillarMaxRow);
+    var bottomCollision = bottomPillar.findCollision(trajectory);
     if (bottomCollision.collided) {
       return createCollisionResult(bottomCollision);
     }

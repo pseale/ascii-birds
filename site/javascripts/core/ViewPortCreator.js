@@ -4,8 +4,12 @@ var ViewPortCreator = function() {
   var my = function() { };
 
   my.findPillarsInViewPort = function(scrollLocation, pillar) {
-    return _.map(pillar.findAllNearby(scrollLocation), function(col) { 
-      return col - scrollLocation;
+    return _.map(pillar.findAllNearby(scrollLocation), function(p) { 
+      return {
+        offset: p.offset - scrollLocation,
+        lowestRow: p.lowestRow,
+        highestRow: p.highestRow,
+      };
     });
   };
 

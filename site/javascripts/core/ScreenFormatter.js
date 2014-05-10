@@ -51,10 +51,10 @@ var ScreenFormatter = function() {
   }
 
   function drawPillar(screen, pillarArray, minRow, maxRow) {
-    var pillarsInView = _.filter(pillarArray, function(pillar) { return pillar < AsciiBirds.windowWidth; });
+    var pillarsInView = _.filter(pillarArray, function(pillar) { return pillar.offset < AsciiBirds.windowWidth; });
     _.each(pillarsInView, function (pillar) {
-      _.each(_.range(minRow, maxRow+1), function(row) {
-        screen[row][pillar] = "#";
+      _.each(_.range(pillar.lowestRow, pillar.highestRow+1), function(row) {
+        screen[row][pillar.offset] = "#";
       });
     });
   }

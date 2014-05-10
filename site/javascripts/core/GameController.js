@@ -2,8 +2,8 @@
 
 var GameController = Class.extend({
   init: function() {
-    this.topPillar = new Pillar();
-    this.bottomPillar = new Pillar();
+    this.topPillar = new Pillar(true);
+    this.bottomPillar = new Pillar(false);
 
     this.playerLocation = pointRowCol(AsciiBirds.playerStartRow, AsciiBirds.playerStartCol);
     this.collided = false;
