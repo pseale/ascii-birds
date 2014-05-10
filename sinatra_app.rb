@@ -8,4 +8,4 @@ class AsciiBirdsApp < Sinatra::Application
   use_static_index 'index.html'
 end
 
-AsciiBirdsApp.run!
+#AsciiBirdsApp.run!
