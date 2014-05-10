@@ -1,3 +1,5 @@
 .jhw-cache/**
 .idea/**
 ascii-birds.sublime-workspace
+node_modules/**
+*.orig

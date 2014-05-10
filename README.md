@@ -34,15 +34,20 @@ Goals
 * Solve a fun problem
 * Try out jasmine specs
 * Experiment with organizing JavaScript code
-
+* Try out lo-dash
 
 Things I could and probably should improve, but won't
 -----------------------------------------------------
 
 * UI:
-  * I use a lot of "id" tags in the HTML instead of "class"es. Mostly. In "real" apps I'd favor using classes over ids as things were much more likely to be reused.
-  * I sacrificed some usability (tab-friendliness and consistency on link/button clicking) to make my artisanal ASCII buttons.
-  * There is a lot of duplication in the HTML that I could eliminate if I used either server-side templates, or even client-side JavaScript templates. I didn't do either, just know that I could, and know that I know you know.
+  * I use a lot of "id" tags in the HTML instead of "class"es. Mostly. In real apps I favor using classes over ids as content is more likely to be reused.
+  * I sacrificed some usability--specifically, tab-friendliness and consistency on link/button clicking--to make my artisanal ASCII buttons.
+  * There is a lot of duplication in the HTML that I could eliminate if I used either server-side templates, or even client-side JavaScript templates. I didn't do either, just know that I could, and know that I know you know I could.
+  * I use boolean flags to enable/disable features (e.g. you can't use the move command unless you're in-game), and I am aware I can improve this. If it gets any more complicated than it already is (3 flags currently), I'll make a state machine.
+
+* Code organization:
+  * I experimented with a lot of things, from naked global functions, to modules, to a class.js helper library. On larger projects I would be strict about using modules--but this isn't a larger project. 
+  * Even so, I should do something about the naked pointRowCol() function.
 
 * Jasmine specs:
   * I have real problems with getting Jasmine to do what I want to do, how I want to do it. Specifically, I feel like I should never be using beforeEach() blocks; instead I want to  replace any beforeEach() calls with a call to some kind of context() method that is called once per describe block. With this in mind, I half gave up cleaning up my Jasmine specs until I figure out how to write them in my style.
@@ -51,7 +56,3 @@ Things I could and probably should improve, but won't
     * Flying in the air near a pillar doesn't cause a collision
     * Colliding with the bottom pillar causes a collision
     * Flying out of bounds doesn't cause a collision
-* I'm aware that everything related to RSpec/Ruby is an absolute mess, and I will delete it all. Probably.
-  * RSpec specs broke, but I'm not willing to delete them until I delete all of RSpec from this project. I am absolutely willing to test drive an app from a browser-only interface, but I don't have the gumption to do it for this project.
-  * The abomination that is the mixture of Jasmine specs alongside the Jasmine spec runner alongside the Jasmine support files. I am choosing to leave it bloated and broken until I wipe out all of RSpec.
-

@@ -6,7 +6,11 @@ var HardcodedPillarGenerator = Class.extend({
   },
 
   next: function() {
-    return this.array.shift();
+    var value = this.array.shift();
+    if (value === undefined)
+      return Infinity;
+
+    return value;
   }
 });
 
@@ -16,7 +20,7 @@ var ObjectMother = {
   },
 
   createGameWithHardcodedPillars: function(topPillarArray, bottomPillarArray) {
-    if (topPillarArray === null || topPillarArray.length === 0 || bottomPillarArray === null || bottomPillarArray.length === 0 ) {
+    if (topPillarArray === null || !_.any(topPillarArray) || bottomPillarArray === null || !_.any(bottomPillarArray) ) {
       throw new Error("Test setup error: can't create a hardcoded game with no pillars whatsoever. If you don't want pillars in your game, create pillars far away (e.g. pillar at location 500)");
     }
 

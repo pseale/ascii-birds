@@ -10,22 +10,11 @@ var ViewPortCreator = function() {
   };
 
   function shiftTrajectoriesForViewPort(scrollLocation, trajectories) {
-    //refactor out these awful temp arrays when I switch out from underscore to lo-dash
-    var newTrajectories = [];
-    for (var i=0; i<trajectories.length; i++) {
-      var newTrajectory = [];
-      var legalPoints = _.filter(trajectories[i], function(point) {
-        return point.isLegal();
-      });
-
-      for (var j=0; j<legalPoints.length; j++) {
-        newTrajectory.push(shiftLocationForViewPort(scrollLocation, legalPoints[j]));
-      }
-
-      newTrajectories.push(newTrajectory);
-    }
-
-    return newTrajectories;
+    return _(trajectories).map(function(trajectory) {
+      return  _(trajectory).filter(function(point) { return point.isLegal(); })
+        .map(function(point) { return shiftLocationForViewPort(scrollLocation, point); })
+        .value();
+    }).value();
   }
 
   function shiftLocationForViewPort(scrollLocation, point) {
@@ -48,7 +37,7 @@ var ViewPortCreator = function() {
 
     if (playerLocation === undefined) {
       return result;
-    };
+    }
 
     return _.extend(result, {
       playerLocation: shiftLocationForViewPort(scrollLocation, playerLocation),

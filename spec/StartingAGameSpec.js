@@ -13,10 +13,10 @@ describe("Starting a new game", function() {
   });
 
   it("has a row of top-side pillars", function() {
-    expect(viewPort.topPillars.length > 0).toBeTruthy(); //improve once we "randomly" generate columns
+    expect(_.any(viewPort.topPillars)).toBeTruthy(); //improve once we "randomly" generate columns
   });
 
   it("has a row of bottom-side pillars", function() {
-    expect(viewPort.bottomPillars.length > 0).toBeTruthy(); //improve once we "randomly" generate columns
+    expect(_.any(viewPort.bottomPillars)).toBeTruthy(); //improve once we "randomly" generate columns
   });
 });

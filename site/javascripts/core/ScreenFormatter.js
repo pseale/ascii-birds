@@ -27,7 +27,7 @@ var ScreenFormatter = function() {
     //draw "overlays" or "windows" over the rest of the screen
     drawScore(screenText, viewPort.score);
     if (viewPort.gameOver) {
-      screenText[5] = "<span class='game-over-alert'> ::: GAME  OVER ::: </span>"
+      screenText[5] = "<span class='game-over-alert'> ::: GAME  OVER ::: </span>";
     }
 
     return screenText;
@@ -37,23 +37,25 @@ var ScreenFormatter = function() {
   function createEmptyScreen() {
     var screen = [];
 
-    for (var row=0; row<AsciiBirds.windowHeight; row++) {
-      var rowArray = [];
-      for (var col=0; col<AsciiBirds.windowWidth; col++) {
-        rowArray.push("\u00B7"); //Unicode character is an 'Interpunct': http://en.wikipedia.org/wiki/Interpunct
-      }
-      screen.push(rowArray);
-    }
+    _(_.range(0, AsciiBirds.windowHeight)).each(function(row) {
+
+      screen.push(
+        _(_.range(0, AsciiBirds.windowWidth)).map(function(col) {
+          return "\u00B7"; //Unicode character is an 'Interpunct': http://en.wikipedia.org/wiki/Interpunct
+        })
+        .value());
+
+    });
 
     return screen;
   }
 
   function drawPillar(screen, pillarArray, minRow, maxRow) {
-    var pillarsInView = _.filter(pillarArray, function(pillar) { return pillar < AsciiBirds.windowWidth });
+    var pillarsInView = _.filter(pillarArray, function(pillar) { return pillar < AsciiBirds.windowWidth; });
     _.each(pillarsInView, function (pillar) {
-      for(var row=minRow; row<=maxRow; row++) {
+      _.each(_.range(minRow, maxRow+1), function(row) {
         screen[row][pillar] = "#";
-      }
+      });
     });
   }
 
@@ -69,24 +71,17 @@ var ScreenFormatter = function() {
   }
 
   function drawTrajectories(screen, trajectories) {
-    for (var i=0; i<trajectories.length; i++) {
+    _(_.range(0, trajectories.length)).each(function(i) {
       _.each(trajectories[i], function(point) {
         screen[point.row][point.col] = "<span class='trajectory-" + i + "'>" + screen[point.row][point.col] + "</span>";
       });
-    }
+    });
   }
 
   function convertScreenArrayToText(screen) {
-    var screenText = [];
-    _.each(screen, function(row) {
-      var rowText = "";
-      for (var i=0;i<row.length; i++) {
-        rowText += row[i];
-      }
-      screenText.push(rowText);
+    return _.map(screen, function(row) {
+      return row.join('');
     });
-
-    return screenText;
   }
 
   function drawScore(screenText, score) {
