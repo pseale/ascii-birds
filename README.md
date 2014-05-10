@@ -4,17 +4,19 @@ Daily Programmer #157
 Quickstart
 ----------
 
-This is a static HTML/CSS/JavaScript site I created to solve Daily Programmer #157. To try it out:
+This is a static HTML/CSS/JavaScript site I created to solve Daily Programmer #157. 
 
-* Download/clone/unpack the source
-* To launch the game, either:
-  * (linux/Mac) run `./launch-ascii-birds.sh`
-  * launch `./site/index.html` in your browser. (Due to browser security, loading help will not work from a file:// URL.)
+* To try it out NOW, visit http://ascii-birds.herokuapp.com/
+* To try it out on your machine:
+  * Download/clone/unpack the source, then
+  * launch the game:
+    * (linux/Mac) run `./launch-ascii-birds.sh`
+    * launch `site/index.html` in your browser. (If ASCII Birds is launched from the filesystem, the "(?) HOW TO PLAY" link will not function. You can still view the help page manually.)
 * To run Jasmine specs,
-  * launch `./spec/javascripts/SpecRunner.html` in your browser.
-* To run the capybara/RSpec specs (now broken),
-  * `bundle`
-  * `bundle exec rspec`
+  * launch `spec/javascripts/SpecRunner.html` in your browser.
+* To run jshint,
+  * install nodejs and jshint (QED--this exercise left for the reader).
+  * `jshint site/javascripts/core`
 
 
 If you plan to inspect the project's source, please do me a solid and read the Notes, Goals, and most importantly, the "Things I could and probably should improve, but won't" section.
