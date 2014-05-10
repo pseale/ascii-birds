@@ -3,3 +3,4 @@
 ascii-birds.sublime-workspace
 node_modules/**
 *.orig
+Gemfile.lock

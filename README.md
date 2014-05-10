@@ -9,9 +9,12 @@ This is a static HTML/CSS/JavaScript site I created to solve Daily Programmer #1
 * To try it out NOW, visit http://ascii-birds.herokuapp.com/
 * To try it out on your machine:
   * Download/clone/unpack the source, then
-  * launch the game:
+  * launch the game one of three exciting ways!
     * (linux/Mac) run `./launch-ascii-birds.sh`
     * launch `site/index.html` in your browser. (If ASCII Birds is launched from the filesystem, the "(?) HOW TO PLAY" link will not function. You can still view the help page manually.)
+    * Using the Sinatra app:
+      * `bundle`
+      * `bundle exec ruby sinatra_app.rb` 
 * To run Jasmine specs,
   * launch `spec/javascripts/SpecRunner.html` in your browser.
 * To run jshint,
